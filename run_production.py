@@ -15,6 +15,14 @@ def main():
     env["PYTHONPATH"] = f"{base_dir}{sep}{st_app_dir}{sep}{existing_pp}"
     env["API_BASE_URL"] = "http://127.0.0.1:8000"
     
+    # Suppress Streamlit email prompt and configure server in environment
+    env["STREAMLIT_BROWSER_GATHER_USAGE_STATS"] = "false"
+    env["STREAMLIT_SERVER_HEADLESS"] = "true"
+    env["STREAMLIT_SERVER_ADDRESS"] = "0.0.0.0"
+    env["STREAMLIT_SERVER_PORT"] = str(port)
+    env["STREAMLIT_SERVER_ENABLE_CORS"] = "false"
+    env["STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION"] = "false"
+    
     print("=========================================================")
     print("  BHOOMI AI (SIH26017) — PRODUCTION SERVICE RUNNER")
     print("=========================================================")
@@ -56,9 +64,7 @@ def main():
         sys.executable, "-m", "streamlit", "run", app_path,
         "--server.port", str(port),
         "--server.address", "0.0.0.0",
-        "--server.headless", "true",
-        "--server.enableCORS", "false",
-        "--server.enableXsrfProtection", "false"
+        "--server.headless", "true"
     ]
     
     try:
@@ -76,4 +82,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
