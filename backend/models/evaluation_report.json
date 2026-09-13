@@ -1,0 +1,34 @@
+{
+  "classifier": {
+    "model_type": "RandomForestClassifier",
+    "accuracy": 0.9608,
+    "precision": 0.9778,
+    "recall": 0.9778,
+    "f1_score": 0.9778
+  },
+  "regressor": {
+    "model_type": "RandomForestRegressor",
+    "rmse": 248.8,
+    "mae": 117.29,
+    "r2_score": 0.7577
+  },
+  "features": [
+    "planned_duration_days",
+    "compensation_pct",
+    "legal_case",
+    "affected_families",
+    "budget_crores",
+    "stage_index",
+    "is_rr_pending",
+    "is_rr_completed",
+    "compensation_deficit",
+    "families_per_crore",
+    "compensation_bucket_low",
+    "compensation_bucket_medium",
+    "compensation_bucket_high",
+    "stage_overdue_flag",
+    "clr_completed_pct",
+    "cost_overrun_pct",
+    "low_clr_risk_flag"
+  ]
+}

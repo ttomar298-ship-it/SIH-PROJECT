@@ -1,0 +1,55 @@
+name,sector,start,target,actual,orig_cost,rev_cost,district,lat,lon
+Interim Terminal Building at Vijayawada Airport,Civil Aviation,2020-04-01,2023-03-01,2023-03-01,611.8,611.8,Krishna,16.5305,80.7968
+Ext and Str. of Existing Runway 08/26 at Tirupati Airport,Civil Aviation,2017-08-01,2020-02-01,2021-12-01,177.1,177.1,Chittoor,13.6324,79.5434
+Construction of Permanent Campus for IISER at Jangalapalli,Higher Education,2019-09-01,2022-09-01,2023-01-01,588.72,588.72,Chittoor,13.6828,79.51
+Construction of Permanent Campus for NITAP Phase 1b at Tadepalligudem,Higher Education,2019-02-01,2020-09-01,2022-06-01,186.0,205.0,West Godavari,16.815,81.527
+Construction of Permanent Campus for IIT Tirupati at Merlapaka,Higher Education,2019-02-01,2020-06-01,2022-12-01,655.34,655.34,Chittoor,13.6288,79.4192
+"Residential Complex and OPD Block, AIIMS Mangalagiri",Health and Family Welfare,2017-08-01,2019-03-01,2021-03-01,272.19,272.54,Guntur,16.435,80.56
+Hospital and Teaching Block - AIIMS Guntur,Health and Family Welfare,2018-03-01,2020-06-01,2021-06-01,601.02,601.02,Guntur,16.44,80.57
+Development of Coastal Terminal at Krishnapatnam Port,Petroleum,2017-07-01,2021-02-01,2023-03-01,580.2,580.2,Nellore,14.25,80.12
+Sulphur Forming Unit in SRU,Petroleum,2020-10-01,2021-08-01,2021-08-01,210.94,210.94,Visakhapatnam,17.6868,83.2185
+RUF Pitch Loading Gantry,Petroleum,2020-10-01,2022-11-01,2022-11-01,332.61,332.61,Visakhapatnam,17.69,83.22
+220 KV Grid Supply Visakhapatnam,Petroleum,2020-10-01,2021-03-01,2021-08-01,303.4,303.4,Visakhapatnam,17.7,83.21
+SWRO II with LLPH Facilities,Petroleum,2019-09-01,2020-07-01,2021-09-01,196.26,196.26,Visakhapatnam,17.695,83.225
+Visakh Refinery Modernisation Project (VRMP),Petroleum,2016-07-01,2020-07-01,2022-07-01,20928.0,26264.0,Visakhapatnam,17.71,83.23
+LPG BP Project Chittoor,Petroleum,2019-07-01,2022-07-01,2022-07-01,167.0,167.0,Chittoor,13.2172,79.1003
+Revamping of Vijayawada Terminal for Conversion to TOP,Petroleum,2018-10-01,2021-10-01,2022-03-01,316.2,316.2,Krishna,16.5062,80.648
+Grass Root Petroleum TOP at Chutapuram,Petroleum,2018-08-01,2021-04-01,2021-12-01,466.0,466.0,Anantapur,14.6819,77.6006
+Revamping of Facilities at Vizag Coastal Terminal,Petroleum,2018-04-01,2022-04-01,2023-02-01,355.0,355.0,Visakhapatnam,17.715,83.24
+Rail Fed Depot at Guntakal,Petroleum,2017-08-01,2021-04-01,2021-03-01,384.58,384.58,Anantapur,15.1667,77.3667
+KG-DWN-98/2 Cluster II Deepwater Development Project,Petroleum,2016-03-01,2020-06-01,2022-06-01,34012.0,25090.0,East Godavari,16.9891,82.2475
+Multi Modal Logistics Park at Kakinada Port,Railways,2016-08-01,2019-03-01,2022-03-01,234.5,235.0,East Godavari,16.9604,82.2381
+Multi Modal Logistics Park at Visakhapatnam,Railways,2013-01-01,2018-03-01,2021-12-01,387.7,487.13,Visakhapatnam,17.72,83.25
+Kottavalasa - Koraput Railway Line Doubling,Railways,2015-04-01,2022-03-01,2024-03-01,2499.71,2499.71,Vizianagaram,18.1167,83.4167
+Vijayawada - Gudur 3rd Railway Line Project,Railways,2015-04-01,2023-12-01,2024-06-01,3246.26,3548.68,Krishna,16.51,80.65
+Vijayawada - Gudivada - Bhimavaram - Narsapur Doubling & Electrification,Railways,2012-03-01,2020-03-01,2022-03-01,1503.71,3377.0,West Godavari,16.54,81.52
+Gudur - Durgarajapatnam Port Railway Link,Railways,2011-04-01,2016-03-01,2022-03-01,761.37,761.37,Nellore,14.15,79.85
+Cumbum - Proddatur Railway Project,Railways,2013-04-01,2018-03-01,2023-03-01,829.0,829.0,Kadapa,14.75,78.55
+Duvvada - Vijayawada 3rd Line Railway Capacity Augmentation,Railways,2015-04-01,2020-03-01,2023-03-01,3873.07,3873.07,Visakhapatnam,17.7,83.15
+Guntur - Guntakal Railway Line Doubling (SCR),Railways,2016-04-01,2022-03-01,2024-03-01,3631.0,3887.48,Guntur,16.3,80.45
+Nadikude - Srikalahasti New Broad Gauge Line,Railways,2011-04-01,2021-03-01,2024-03-01,2288.7,2643.25,Guntur,16.58,79.95
+Kotipalli - Narsapur New Railway Line (SCR),Railways,2001-12-01,2009-03-01,2024-03-01,1045.2,2120.16,East Godavari,16.69,82.02
+Nandyal - Yerraguntla New Broad Gauge Line (SCR),Railways,1996-03-01,2009-02-01,2020-03-01,164.36,1050.0,Kurnool,15.48,78.48
+Rehabilitation of New NH-544e Kodikonda - Madakasira,Road Transport and Highways,2018-03-01,2018-11-01,2021-07-01,504.19,504.19,Anantapur,14.1,77.25
+Rehabilitation and Upgradation of NH-565 Dornala - Tokapalli,Road Transport and Highways,2018-01-01,2018-08-01,2021-08-01,418.03,418.03,Prakasam,15.9,79.1
+Upgradation of NH-544dd Kalyandurg Section,Road Transport and Highways,2018-03-01,2018-08-01,2021-11-01,289.67,289.67,Anantapur,14.55,77.1
+Rehabilitation of NH-326a Srikakulam Section,Road Transport and Highways,2018-03-01,2018-08-01,2021-12-01,228.32,228.32,Srikakulam,18.3,83.9
+Rehabilitation and Upgradation of NH-340 Rayachoti Section,Road Transport and Highways,2017-01-01,2017-08-01,2021-06-01,319.28,319.28,Kadapa,14.05,78.75
+Construction of 4-lane Bypass to Vizianagaram Town on NH-43,Road Transport and Highways,2017-02-01,2017-11-01,2021-10-01,429.43,429.43,Vizianagaram,18.12,83.4
+Upgradation of Machilipatnam to Avanigadda NH-216 Section,Road Transport and Highways,2016-11-01,2017-08-01,2021-08-01,376.25,376.25,Krishna,16.18,81.13
+Rehabilitation of Existing NH-167 Adoni - Alur Section,Road Transport and Highways,2016-11-01,2017-05-01,2021-06-01,290.15,290.15,Kurnool,15.63,77.27
+Rehabilitation of Repalle to Eeppurpalem Section NH-216,Road Transport and Highways,2017-01-01,2018-01-01,2022-04-01,576.48,576.48,Guntur,16.02,80.85
+Four Laning of Gundugolanu - Devarapalli - Kovvuru NH-16 Section,Road Transport and Highways,2018-03-01,2021-03-01,2021-10-01,1532.62,2499.0,West Godavari,16.9,81.4
+Six Laning of Narasannapeta - Ranastalam Section of NH-16,Road Transport and Highways,2017-12-01,2020-06-01,2021-07-01,1323.15,1323.15,Srikakulam,18.25,83.75
+Six Laning of NH-140 Chittoor to Mallavaram Section,Road Transport and Highways,2018-03-01,2020-03-01,2021-09-01,1550.98,1550.98,Chittoor,13.35,79.2
+Six Laning of Anandapuram - Pendurthi - Anakapalli NH-16,Road Transport and Highways,2018-02-01,2020-02-01,2021-10-01,1959.0,1959.0,Visakhapatnam,17.68,83.0
+Dedicated Port Access Highway to Krishnapatnam Port,Road Transport and Highways,2018-03-01,2020-03-01,2022-03-01,314.43,314.43,Nellore,14.28,80.08
+6-Laning of Vijayawada Bypass from Gollapudi to Chinnakakani,Road Transport and Highways,2019-11-01,2021-02-01,2023-06-01,1601.1,1601.1,Krishna,16.52,80.6
+6-Laning of Vijayawada Bypass Chinna Avutupalli to Gollapudi,Road Transport and Highways,2019-11-01,2021-02-01,2023-06-01,1226.88,1226.88,Krishna,16.55,80.68
+Six Laning of Ranastalam - Anandapuram Section of NH-16,Road Transport and Highways,2017-03-01,2020-03-01,2022-03-01,1041.62,1187.1,Visakhapatnam,17.9,83.45
+Four Laning of NH-9 Vijayawada to Machilipatnam Corridor,Road Transport and Highways,2016-01-01,2018-11-01,2021-12-01,1134.97,1134.97,Krishna,16.35,80.9
+Vijayawada - Gundugolanu Section NH-16 Expansion,Road Transport and Highways,2014-09-01,2017-02-01,2021-03-01,1684.0,1684.0,Krishna,16.7,80.95
+Six Laning of Nellore - Chilkaluripet NH-16 Highway,Road Transport and Highways,2011-11-01,2014-05-01,2021-06-01,1535.0,1535.0,Nellore,14.4426,79.9865
+Tirupati - Tiruttani - Chennai Highway Corridor (NH-205),Road Transport and Highways,2011-04-01,2013-10-01,2021-03-01,571.0,571.0,Chittoor,13.5,79.6
+Visakhapatnam Steel Plant Coke Oven Battery-5,Steel,2011-12-01,2017-12-01,2022-03-01,2858.0,2558.0,Visakhapatnam,17.65,83.18
+Polavaram National Multipurpose Irrigation Project,Water Resources,2009-02-01,2020-03-01,2024-06-01,10151.04,55548.87,West Godavari,17.25,81.65
