@@ -150,21 +150,27 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+import logging
+logger = logging.getLogger("bhoomi_ai.gis")
+
 # Backend Health Check
 if not client.check_health():
     st.error("⚠️ Backend API is offline. Please start backend via `python run_backend.py`.")
     st.stop()
 
 # Fetch GIS Data
+markers_data = []
 try:
     markers_data = client.get_gis_data()
 except Exception as e:
-    st.error(f"Failed to load GIS data from backend: {e}")
+    logger.error("Failed to load GIS data from backend: %s", e, exc_info=True)
+    st.error("⚠️ Unable to load geospatial project coordinates from backend service.")
     st.stop()
 
 if not markers_data:
     st.warning("No geospatial project data available.")
     st.stop()
+
 
 # 3-Color Plain-English Visual Guide
 st.markdown("""
@@ -296,8 +302,9 @@ spotlight_selection = st.selectbox(
     "🎯 Spotlight & Jump to Project on Map:",
     project_options,
     index=0,
-    help="Select any project to zoom directly into its exact GPS location and inspect live details."
+    help="Select any project to zoom directly into its exact GPS location and inspect project risk indicators."
 )
+
 
 spotlight_project = None
 if spotlight_selection != "-- Select a Project to Spotlight on Map --":
@@ -405,7 +412,8 @@ with col_map:
     st.caption("💡 **Easy Navigation Tip:** Click any pin to open its data bubble, or scroll/drag to pan anywhere across India.")
 
 with col_inspector:
-    st.markdown("### 🎯 Live Project Inspector")
+    st.markdown("### 🎯 Project Risk Inspector")
+
     
     # Use spotlight project if selected, else default to the top-risk project
     active_p = spotlight_project

@@ -1,0 +1,28 @@
+{
+  "include": [
+    "backend",
+    "frontend",
+    "tests",
+    "*.py"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.*"
+  ],
+  "extraPaths": [
+    ".",
+    "frontend/streamlit_app",
+    "backend"
+  ],
+  "typeCheckingMode": "off",
+  "reportMissingTypeStubs": false,
+  "reportUnknownMemberType": false,
+  "reportUnknownVariableType": false,
+  "reportUnknownArgumentType": false,
+  "reportUnknownParameterType": false,
+  "reportMissingParameterType": false,
+  "reportGeneralTypeIssues": false,
+  "reportMissingImports": false,
+  "reportUnusedImport": false
+}

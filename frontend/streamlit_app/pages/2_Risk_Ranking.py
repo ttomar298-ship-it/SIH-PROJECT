@@ -31,6 +31,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+import logging
+logger = logging.getLogger(__name__)
+
 st.title("🏆 National Project Risk Ranking & Criticality Leaderboard")
 st.markdown("Comprehensive prioritization matrix ranking infrastructure projects by land acquisition bottleneck severity.")
 
@@ -40,10 +43,15 @@ if not client.check_health():
 
 try:
     dashboard_data = client.get_dashboard_data()
-    projects = dashboard_data["projects"]
+    projects = dashboard_data.get("projects", [])
     df = pd.DataFrame(projects)
-except Exception as e:
-    st.error(f"Failed to load risk rankings: {e}")
+except Exception as exc:
+    logger.error("Failed to load risk rankings", exc_info=True)
+    st.error("Unable to load risk ranking leaderboard. Please ensure the backend service is operational.")
+    st.stop()
+
+if df.empty:
+    st.info("No project records available to generate leaderboard.")
     st.stop()
 
 # Controls & Filters
@@ -51,7 +59,7 @@ c_slider, c_state, c_sector = st.columns([2, 1, 1])
 with c_slider:
     min_score = st.slider("Filter by Minimum Calibrated Risk Score", min_value=1, max_value=100, value=50)
 with c_state:
-    all_states = ["All States"] + sorted(list(df["state"].unique()))
+    all_states = ["All States"] + sorted(list(df["state"].dropna().unique()))
     chosen_state = st.selectbox("State / UT", all_states)
 with c_sector:
     all_sectors = ["All Sectors"] + sorted(list(df["sector"].dropna().unique()))

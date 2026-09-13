@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, mean_squared_error, mean_absolute_error, r2_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, mean_squared_error, mean_absolute_error, r2_score
 
 # Ensure backend directory is in sys.path
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
@@ -58,8 +58,9 @@ def train_and_evaluate():
     prec = precision_score(y_test_cls, y_pred_cls, zero_division=0)
     rec = recall_score(y_test_cls, y_pred_cls, zero_division=0)
     f1 = f1_score(y_test_cls, y_pred_cls, zero_division=0)
+    auc = roc_auc_score(y_test_cls, y_prob_cls)
 
-    print(f"Classifier Metrics -> Accuracy: {acc:.4f}, Precision: {prec:.4f}, Recall: {rec:.4f}, F1: {f1:.4f}")
+    print(f"Classifier Metrics -> Accuracy: {acc:.4f}, Precision: {prec:.4f}, Recall: {rec:.4f}, F1: {f1:.4f}, ROC-AUC: {auc:.4f}")
 
     # 2. Train Random Forest Regressor
     reg = RandomForestRegressor(
@@ -93,18 +94,26 @@ def train_and_evaluate():
     }, meta_path)
 
     report = {
+        "dataset": {
+            "total_samples": len(df),
+            "train_samples": len(X_train),
+            "test_samples": len(X_test),
+            "split_method": "80/20 Stratified Train-Test Split (random_state=42)",
+            "features_count": len(FEATURE_COLUMNS)
+        },
         "classifier": {
             "model_type": "RandomForestClassifier",
             "accuracy": round(float(acc), 4),
             "precision": round(float(prec), 4),
             "recall": round(float(rec), 4),
             "f1_score": round(float(f1), 4),
+            "roc_auc": round(float(auc), 4)
         },
         "regressor": {
             "model_type": "RandomForestRegressor",
             "rmse": round(float(rmse), 2),
             "mae": round(float(mae), 2),
-            "r2_score": round(float(r2), 4),
+            "r2_score": round(float(r2), 4)
         },
         "features": FEATURE_COLUMNS
     }
@@ -113,6 +122,7 @@ def train_and_evaluate():
         json.dump(report, f, indent=2)
 
     print(f"Models and evaluation report successfully saved to {models_dir}")
+
 
 if __name__ == "__main__":
     train_and_evaluate()

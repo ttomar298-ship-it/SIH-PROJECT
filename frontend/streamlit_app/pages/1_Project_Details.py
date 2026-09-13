@@ -1,7 +1,6 @@
 import sys
 import os
 import streamlit as st
-import pandas as pd
 
 # Ensure application directory and root are in sys.path
 PAGE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -77,6 +76,9 @@ st.markdown("""
 st.title("📊 Project Deep-Dive & Timeline Inspection")
 st.markdown("Detailed breakdown of statutory land acquisition stages, compensation disbursements, court disputes, and AI delay forecasts.")
 
+import logging
+logger = logging.getLogger(__name__)
+
 if not client.check_health():
     st.error("⚠️ Backend API is offline. Please start backend via `python run_backend.py`.")
     st.stop()
@@ -84,24 +86,33 @@ if not client.check_health():
 # Load project list for dropdown
 try:
     all_projects = client.get_projects()
-    # Sort projects alphabetically
-    all_projects_sorted = sorted(all_projects, key=lambda x: x["project_name"])
-    project_options = {f"{p['project_name']} ({p['district']}, {p['state']}) — [{p['project_id']}]": p["project_id"] for p in all_projects_sorted}
-except Exception as e:
-    st.error(f"Failed to load projects: {e}")
+    all_projects_sorted = sorted(all_projects, key=lambda x: x.get("project_name", ""))
+    project_options = {f"{p.get('project_name', 'Unknown')} ({p.get('district', '')}, {p.get('state', '')}) — [{p.get('project_id', '')}]": p["project_id"] for p in all_projects_sorted if "project_id" in p}
+except Exception as exc:
+    logger.error("Failed to load projects list in Project Details", exc_info=True)
+    st.error("Unable to load project listings. Please ensure the backend service is operational.")
+    st.stop()
+
+if not project_options:
+    st.info("No projects found in the benchmark dataset.")
     st.stop()
 
 selected_label = st.selectbox("Select Project to Inspect", list(project_options.keys()))
-selected_id = project_options[selected_label]
+selected_id = project_options.get(selected_label)
 
 if selected_id:
-    with st.spinner("Analyzing project parameters..."):
-        p = client.get_project(selected_id)
-        pred = client.get_prediction(selected_id)
-        risk = client.get_risk_score(selected_id)
+    try:
+        with st.spinner("Analyzing project parameters..."):
+            p = client.get_project(selected_id)
+            pred = client.get_prediction(selected_id)
+            risk = client.get_risk_score(selected_id)
+    except Exception as exc:
+        logger.error(f"Failed to inspect project {selected_id}", exc_info=True)
+        st.error("Unable to retrieve detailed records for the selected project. Please verify the backend service.")
+        st.stop()
 
     # Hero card
-    risk_col = risk['color_code']
+    risk_col = risk.get('color_code', '#3B82F6')
     st.markdown(f"""
     <div class="detail-hero">
         <div style="display: flex; justify-content: space-between; align-items: center;">

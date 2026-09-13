@@ -12,12 +12,17 @@ for p in [STREAMLIT_DIR, ROOT_DIR]:
     if p not in sys.path:
         sys.path.insert(0, p)
 
+import logging
+logger = logging.getLogger("bhoomi_ai.app")
+
 try:
     from utils.api_client import client
     from utils.auth import render_sidebar_brand, is_authenticated, get_current_user, LOGO_PATH
+    from utils.config import USE_LIVE_API, get_dataset_metadata
 except ImportError:
     from frontend.streamlit_app.utils.api_client import client
     from frontend.streamlit_app.utils.auth import render_sidebar_brand, is_authenticated, get_current_user, LOGO_PATH
+    from frontend.streamlit_app.utils.config import USE_LIVE_API, get_dataset_metadata
 
 st.set_page_config(
     page_title="BHOOMI AI — PM GatiShakti Land Intelligence",
@@ -28,6 +33,7 @@ st.set_page_config(
 
 # Render global Bhoomi AI sidebar branding & logo
 render_sidebar_brand()
+
 
 # Premium Custom CSS
 st.markdown("""
@@ -149,9 +155,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Hero Header Banner with Bhoomi AI branding
+# Hero Header Banner with Bhoomi AI branding & accurate dataset status
 curr_user = get_current_user()
 welcome_msg = f"Welcome back, <strong>{curr_user['name']}</strong> ({curr_user['role']})" if curr_user else "Welcome, Officer / Observer • <a href='pages/0_Officer_Login.py' style='color: #6EE7B7; text-decoration: underline;'>Sign in for official clearance</a>"
+
+dataset_meta = get_dataset_metadata()
+if dataset_meta["use_live_api"]:
+    status_badge_html = '<span style="background: rgba(16, 185, 129, 0.2); color: #34D399; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 0.82rem; border: 1px solid rgba(52, 211, 153, 0.4);">🟢 LIVE API CONNECTED</span>'
+else:
+    status_badge_html = '<span style="background: rgba(148, 163, 184, 0.2); color: #CBD5E1; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 0.82rem; border: 1px solid rgba(148, 163, 184, 0.4);" title="Static benchmark dataset — no external live streaming feed connected">📦 BENCHMARK DATASET (Static)</span>'
 
 st.markdown(f"""
 <div class="hero-container">
@@ -164,38 +176,48 @@ st.markdown(f"""
             <p class="hero-subtitle">
                 AI decision-support system forecasting infrastructure delays, mitigating land acquisition bottlenecks, and integrating DILRMP land digitization.
             </p>
-            <div style="margin-top: 8px; font-size: 0.85rem; color: #CBD5E1;">
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #CBD5E1;">
                 👤 {welcome_msg}
             </div>
-            <div class="hero-badges">
+            <div style="font-size: 0.78rem; color: #94A3B8; margin-top: 8px; background: rgba(0,0,0,0.25); padding: 4px 10px; border-radius: 6px; display: inline-block;">
+                📅 <strong>Data As Of:</strong> {dataset_meta['last_updated']} • <strong>Coverage:</strong> {dataset_meta['record_count']} National Mega-Projects • <strong>Source:</strong> {dataset_meta['source_attribution']}
+            </div>
+            <div class="hero-badges" style="margin-top: 10px;">
                 <span class="gov-badge">🤖 TreeSHAP Explainable AI</span>
-                <span class="gov-badge">📊 250+ National Mega Projects</span>
+                <span class="gov-badge">📊 {dataset_meta['record_count']} National Mega Projects</span>
                 <span class="gov-badge">📜 34 States DILRMP Data</span>
                 <span class="gov-badge">🚨 Automated Priority Alerts</span>
             </div>
         </div>
         <div style="text-align: right;">
-            <span style="background: rgba(16, 185, 129, 0.2); color: #34D399; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; border: 1px solid rgba(52, 211, 153, 0.4);">
-                🟢 LIVE API CONNECTED
-            </span>
+            {status_badge_html}
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
+# Data Refresh controls
+c_refresh_left, c_refresh_btn = st.columns([5, 1])
+with c_refresh_btn:
+    if st.button("🔄 Refresh Data", key="btn_refresh_dashboard", help="Reload latest cached records"):
+        st.cache_data.clear()
+        st.rerun()
 
 # Check API health
 if not client.check_health():
-    st.error("⚠️ Backend API is offline. Please launch the backend via `python run_backend.py`.")
+    st.error("⚠️ Backend API service is offline. Please launch the backend via `python run_backend.py`.")
     st.stop()
 
 # Fetch dashboard data
-with st.spinner("Synchronizing real-time project intelligence..."):
+data = None
+with st.spinner("Loading infrastructure portfolio dataset..."):
     try:
         data = client.get_dashboard_data()
     except Exception as e:
-        st.error(f"Error loading dashboard: {e}")
+        logger.error("Error loading dashboard data: %s", e, exc_info=True)
+        st.error("⚠️ Unable to load portfolio dashboard data. Please verify the backend service is running.")
         st.stop()
+
 
 # 1. Plain English Guide
 with st.expander("💡 **How to Read This Dashboard in 30 Seconds** (Click to Expand)", expanded=False):

@@ -81,6 +81,26 @@ class APIClient:
         res.raise_for_status()
         return res.json()
 
+    def get_model_metrics(self) -> Dict[str, Any]:
+        try:
+            url = f"{self.base_url}/model-metrics"
+            res = requests.get(url, timeout=5)
+            if res.status_code == 200:
+                return res.json()
+        except Exception:
+            pass
+
+        # Fallback to local evaluation_report.json file if API is unreachable
+        local_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "backend", "models", "evaluation_report.json"))
+        if os.path.exists(local_path):
+            try:
+                import json
+                with open(local_path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+        return {}
+
 # Global client singleton
 client = APIClient()
 

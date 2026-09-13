@@ -1,10 +1,18 @@
 {
+  "dataset": {
+    "total_samples": 254,
+    "train_samples": 203,
+    "test_samples": 51,
+    "split_method": "80/20 Stratified Train-Test Split (random_state=42)",
+    "features_count": 17
+  },
   "classifier": {
     "model_type": "RandomForestClassifier",
     "accuracy": 0.9608,
     "precision": 0.9778,
     "recall": 0.9778,
-    "f1_score": 0.9778
+    "f1_score": 0.9778,
+    "roc_auc": 0.9889
   },
   "regressor": {
     "model_type": "RandomForestRegressor",

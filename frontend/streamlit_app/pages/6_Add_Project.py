@@ -18,6 +18,9 @@ except ImportError:
     from frontend.streamlit_app.utils.api_client import client
     from frontend.streamlit_app.utils.auth import render_sidebar_brand
 
+import logging
+logger = logging.getLogger("bhoomi_ai.simulator")
+
 st.set_page_config(page_title="Project Simulator — Bhoomi AI", page_icon="➕", layout="wide")
 
 # Render Bhoomi AI logo & sidebar
@@ -42,16 +45,24 @@ STAGES = [
 ]
 
 STATES = [
-    "Andhra Pradesh", "Maharashtra", "Gujarat", "Uttar Pradesh", "Tamil Nadu", "Karnataka",
-    "Odisha", "Rajasthan", "West Bengal", "Madhya Pradesh", "Bihar", "Assam", "Manipur"
+    "Andhra Pradesh", "Assam", "Bihar", "Chhattisgarh", "Delhi",
+    "Goa", "Gujarat", "Haryana", "Jharkhand", "Karnataka",
+    "Kerala", "Madhya Pradesh", "Maharashtra", "Odisha",
+    "Punjab", "Rajasthan", "Tamil Nadu", "Telangana",
+    "Uttar Pradesh", "Uttarakhand", "West Bengal"
 ]
 
 SECTORS = [
     "Road Transport and Highways",
     "Railways",
-    "Civil Aviation",
-    "Petroleum",
+    "Shipping and Ports",
+    "Petroleum and Natural Gas",
+    "Power / Renewable Energy",
     "Water Resources",
+    "Heavy Industry",
+    "Civil Aviation",
+    "Telecommunications",
+    "Urban Development",
     "Health and Family Welfare",
     "Higher Education"
 ]
@@ -59,8 +70,8 @@ SECTORS = [
 tab_sim, tab_ingest = st.tabs(["🧪 Interactive 'What-If' Delay Simulator", "💾 Save New Project to National Registry"])
 
 with tab_sim:
-    st.subheader("⚡ Live Delay Sensitivity Playground")
-    st.caption("Adjust the sliders below to see the AI model update risk score and expected delay instantly.")
+    st.subheader("⚡ Delay Sensitivity Simulation Sandbox")
+    st.caption("Adjust the sliders below to see the AI model update risk score and expected delay.")
 
     s_col1, s_col2 = st.columns(2)
     with s_col1:
@@ -111,7 +122,7 @@ with tab_sim:
         )
 
         st.markdown("---")
-        st.subheader("🎯 Real-Time Simulated Output")
+        st.subheader("🎯 Simulated Forecast Output")
         
         r1, r2, r3 = st.columns(3)
         with r1:
@@ -128,7 +139,9 @@ with tab_sim:
         st.info(f"💡 **AI Recommendation:** {sim_risk['action_recommendation']}")
 
     except Exception as e:
-        st.warning(f"Live preview calculation: {e}")
+        logger.error("Simulation sensitivity calculation failed: %s", e, exc_info=True)
+        st.warning("⚠️ Simulation engine is temporarily unable to calculate preview values.")
+
 
 with tab_ingest:
     st.subheader("💾 Ingest & Register New Infrastructure Project")
@@ -180,4 +193,6 @@ with tab_ingest:
             res = client.create_project(payload)
             st.success(f"🎉 Project saved to database! Generated ID: **{res['project_id']}** (Forecasted Delay: {res.get('delay_days')} days)")
         except Exception as e:
-            st.error(f"Failed to submit: {e}")
+            logger.error("Failed to submit project: %s", e, exc_info=True)
+            st.error("⚠️ Failed to register project in the national database. Please verify input fields and backend connection.")
+

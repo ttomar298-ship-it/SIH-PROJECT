@@ -39,11 +39,15 @@ with c_refresh:
     if st.button("🔄 Refresh Alerts"):
         st.rerun()
 
+import logging
+logger = logging.getLogger(__name__)
+
 try:
     with st.spinner("Scanning project alerts..."):
         alerts = client.get_alerts(threshold=threshold)
-except Exception as e:
-    st.error(f"Failed to retrieve alerts: {e}")
+except Exception as exc:
+    logger.error("Failed to retrieve alerts", exc_info=True)
+    st.error("Unable to retrieve project alerts. Please ensure the backend service is operational.")
     st.stop()
 
 st.divider()
@@ -102,15 +106,19 @@ else:
                 st.write("")
                 btn_key = f"dispatch_{alert['project_id']}_{idx}"
                 if st.button(f"📧 Send Email Alert for {alert['project_id']}", key=btn_key):
-                    with st.spinner("Dispatching alert..."):
-                        res = client.send_alert_email(alert["project_id"], recipient=recipient_val)
-                        if res.get("status") == "success":
-                            st.success(f"✅ Alert dispatched! ({res.get('mode')}) to {res.get('recipient')}")
-                            with st.expander("📄 View Email Content Preview"):
-                                import streamlit.components.v1 as components
-                                components.html(res.get("html_preview", "<p>No preview</p>"), height=400, scrolling=True)
-                        else:
-                            st.error(f"Failed to dispatch email: {res.get('message')}")
+                    try:
+                        with st.spinner("Dispatching alert..."):
+                            res = client.send_alert_email(alert["project_id"], recipient=recipient_val)
+                            if res.get("status") == "success":
+                                st.success(f"✅ Alert dispatched! ({res.get('mode')}) to {res.get('recipient')}")
+                                with st.expander("📄 View Email Content Preview"):
+                                    import streamlit.components.v1 as components
+                                    components.html(res.get("html_preview", "<p>No preview</p>"), height=400, scrolling=True)
+                            else:
+                                st.error(f"Failed to dispatch email: {res.get('message')}")
+                    except Exception as exc:
+                        logger.error(f"Error dispatching alert email for {alert['project_id']}", exc_info=True)
+                        st.error("Unable to dispatch email alert. Please check notification service configuration.")
 
             st.markdown("---")
 

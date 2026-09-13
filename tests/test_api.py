@@ -113,8 +113,20 @@ def test_full_api_suite():
         assert "CLR_Completed_Pct" in dilrmp[0]
         print(f"[PASS] GET /dilrmp-data returned {len(dilrmp)} states and Union Territories")
 
+        # 12. Model Metrics validation test
+        res = client.get("/model-metrics")
+        assert res.status_code == 200, f"GET /model-metrics failed: {res.text}"
+        metrics = res.json()
+        assert "classifier" in metrics
+        assert "regressor" in metrics
+        assert "dataset" in metrics
+        assert "roc_auc" in metrics["classifier"]
+        assert "accuracy" in metrics["classifier"]
+        assert "mae" in metrics["regressor"]
+        print(f"[PASS] GET /model-metrics -> Acc: {metrics['classifier']['accuracy']}, ROC-AUC: {metrics['classifier']['roc_auc']}, MAE: {metrics['regressor']['mae']}")
+
         print("\n==========================================")
-        print("ALL 11 API CONTRACT TESTS PASSED PERFECTLY!")
+        print("ALL 12 API CONTRACT TESTS PASSED PERFECTLY!")
         print("==========================================")
 
 

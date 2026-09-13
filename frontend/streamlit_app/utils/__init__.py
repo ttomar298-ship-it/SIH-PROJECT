@@ -9,6 +9,7 @@ from .auth import (
     DEMO_USERS,
     LOGO_PATH
 )
+from .config import USE_LIVE_API, get_dataset_metadata
 
 __all__ = [
     "client",
@@ -20,5 +21,8 @@ __all__ = [
     "logout",
     "render_sidebar_brand",
     "DEMO_USERS",
-    "LOGO_PATH"
+    "LOGO_PATH",
+    "USE_LIVE_API",
+    "get_dataset_metadata"
 ]
+

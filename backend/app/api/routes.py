@@ -334,12 +334,21 @@ def get_dilrmp_data():
     df = pd.read_csv(csv_path)
     records = []
     for _, row in df.iterrows():
-        r = row.to_dict()
-        r["State_UT"] = str(row.get("State/UT", ""))
-        r["Total_RORs"] = row.get("Total RORs", 0)
-        r["Total_Villages"] = row.get("Total No. of Villages", 0)
-        r["Villages_CLR_Completed"] = row.get("Villages of CLR Completed (No.)", 0)
-        r["CLR_Completed_Pct"] = float(row.get("Villages of CLR Completed (%)", 0.0))
-        records.append(r)
+        records.append({
+            "State_UT": str(row.get("State/UT", "")),
+            "Total_RORs": int(row.get("Total RORs", 0)),
+            "Total_Villages": int(row.get("Total No. of Villages", 0)),
+            "Villages_CLR_Completed": int(row.get("Villages of CLR Completed (No.)", 0)),
+            "CLR_Completed_Pct": float(row.get("Villages of CLR Completed (%)", 0.0))
+        })
     return records
 
+# Endpoint to get ML Model Validation and Evaluation Metrics
+@router.get("/model-metrics")
+def get_model_metrics():
+    metrics_path = os.path.join(BASE_DIR, "backend", "models", "evaluation_report.json")
+    if not os.path.exists(metrics_path):
+        raise HTTPException(status_code=404, detail="Model evaluation report not found.")
+    import json
+    with open(metrics_path, "r", encoding="utf-8") as f:
+        return json.load(f)
