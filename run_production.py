@@ -58,7 +58,7 @@ def main():
         print("  [WARN] Backend taking longer to initialize; proceeding with frontend startup...")
 
     # 2. Start Streamlit Frontend on public Render port
-    app_path = os.path.join(base_dir, "frontend", "streamlit_app", "app.py")
+    app_path = os.path.join(base_dir, "frontend", "streamlit_app", "Home.py")
     print(f"\n[Step 2/2] Starting Streamlit frontend on port {port} (0.0.0.0) ...")
     frontend_cmd = [
         sys.executable, "-m", "streamlit", "run", app_path,

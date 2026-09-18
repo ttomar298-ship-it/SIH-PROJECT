@@ -159,11 +159,11 @@ if is_authenticated() and user:
         st.markdown("**Quick Navigation:**")
         col_nav1, col_nav2 = st.columns(2)
         with col_nav1:
-            st.page_link("app.py", label="📊 Dashboard", icon="📈", width="stretch")
-            st.page_link("pages/4_GIS_Map.py", label="🗺️ GIS Map", icon="🌍", width="stretch")
+            st.page_link("Home.py", label="Home Dashboard", icon="🏠", width="stretch")
+            st.page_link("pages/4_🗺️_GIS_Map.py", label="GIS Risk Map", icon="🗺️", width="stretch")
         with col_nav2:
-            st.page_link("pages/2_Risk_Ranking.py", label="⚠️ Risk Ranking", icon="🚨", width="stretch")
-            st.page_link("pages/5_Alerts.py", label="🔔 Smart Alerts", icon="📬", width="stretch")
+            st.page_link("pages/2_🏆_Risk_Ranking.py", label="Risk Ranking", icon="🏆", width="stretch")
+            st.page_link("pages/5_🚨_Alerts.py", label="Smart Alerts", icon="🚨", width="stretch")
 
     st.markdown("---")
     st.markdown("### 🔄 Switch Officer Role")

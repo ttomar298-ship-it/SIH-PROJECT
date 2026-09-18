@@ -428,39 +428,39 @@ with col_inspector:
         badge_fg = "#DC2626" if is_high else ("#D97706" if is_med else "#059669")
 
         st.markdown(f"""
-        <div class="inspector-card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <span style="background: {badge_bg}; color: {badge_fg}; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 12px;">
-                    {active_p['risk_category'].upper()} RISK ({active_p['risk_score']}/100)
-                </span>
-                <span style="font-size: 0.75rem; color: #64748B; font-weight: 600;">{active_p.get('sector', 'Infrastructure')}</span>
-            </div>
-            <h3 style="margin: 10px 0 4px 0; color: #0F172A; font-size: 1.25rem;">{active_p['project_name']}</h3>
-            <div style="font-size: 0.8rem; color: #64748B; margin-bottom: 12px;">
-                📍 {active_p['district']}, {active_p['state']} • Code: <code>{active_p['project_id']}</code>
-            </div>
-            
-            <div style="background: #F8FAFC; border-radius: 10px; padding: 12px; margin-bottom: 12px; border: 1px solid #E2E8F0;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
-                    <span style="color: #475569;">Forecasted Delay:</span>
-                    <strong style="color: #DC2626;">+{active_p['delay_days']} days</strong>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
-                    <span style="color: #475569;">Acquisition Stage:</span>
-                    <strong style="color: #1E293B;">{active_p['stage']}</strong>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
-                    <span style="color: #475569;">Disbursed Compensation:</span>
-                    <strong style="color: {'#16A34A' if active_p['compensation_pct'] >= 70 else '#DC2626'};">{active_p['compensation_pct']}%</strong>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
-                    <span style="color: #475569;">Litigation / Stay Order:</span>
-                    <strong style="color: {'#DC2626' if active_p['legal_case'] == 1 else '#16A34A'};">
-                        {'⚠️ Active Injunction' if active_p['legal_case'] == 1 else '⚖️ No Active Disputes'}
-                    </strong>
-                </div>
-            </div>
-        """, unsafe_allow_html=True)
+<div class="inspector-card">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <span style="background: {badge_bg}; color: {badge_fg}; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 12px;">
+            {active_p['risk_category'].upper()} RISK ({active_p['risk_score']}/100)
+        </span>
+        <span style="font-size: 0.75rem; color: #64748B; font-weight: 600;">{active_p.get('sector', 'Infrastructure')}</span>
+    </div>
+    <h3 style="margin: 10px 0 4px 0; color: #0F172A; font-size: 1.25rem;">{active_p['project_name']}</h3>
+    <div style="font-size: 0.8rem; color: #64748B; margin-bottom: 12px;">
+        📍 {active_p['district']}, {active_p['state']} • Code: <code>{active_p['project_id']}</code>
+    </div>
+    <div style="background: #F8FAFC; border-radius: 10px; padding: 12px; margin-bottom: 12px; border: 1px solid #E2E8F0;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
+            <span style="color: #475569;">Forecasted Delay:</span>
+            <strong style="color: #DC2626;">+{active_p['delay_days']} days</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
+            <span style="color: #475569;">Acquisition Stage:</span>
+            <strong style="color: #1E293B;">{active_p['stage']}</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
+            <span style="color: #475569;">Disbursed Compensation:</span>
+            <strong style="color: {'#16A34A' if active_p['compensation_pct'] >= 70 else '#DC2626'};">{active_p['compensation_pct']}%</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+            <span style="color: #475569;">Litigation / Stay Order:</span>
+            <strong style="color: {'#DC2626' if active_p['legal_case'] == 1 else '#16A34A'};">
+                {'⚠️ Active Injunction' if active_p['legal_case'] == 1 else '⚖️ No Active Disputes'}
+            </strong>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
         
         # Plain-English AI Diagnosis
         st.markdown("**🧠 Plain-English AI Root Cause:**")
@@ -480,11 +480,11 @@ with col_inspector:
         with c_act1:
             if st.button("📊 TreeSHAP Why?", key="btn_insp_shap", width="stretch"):
                 st.session_state["selected_project_id"] = active_p["project_id"]
-                st.switch_page("pages/3_SHAP_Explanations.py")
+                st.switch_page("pages/3_🧠_SHAP_Explanations.py")
         with c_act2:
             if st.button("📄 Full Dossier", key="btn_insp_dossier", width="stretch"):
                 st.session_state["selected_project_id"] = active_p["project_id"]
-                st.switch_page("pages/1_Project_Details.py")
+                st.switch_page("pages/1_📊_Project_Details.py")
 
 
 # Top Hotspots Quick Table Below
