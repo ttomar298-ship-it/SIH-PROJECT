@@ -45,14 +45,105 @@ DEMO_USERS = {
     }
 }
 
+import json
+
+SESSION_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".session_officer.json"))
+
+def _save_officer_session(data: dict) -> None:
+    try:
+        with open(SESSION_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f)
+    except Exception:
+        pass
+
+def _load_officer_session() -> dict | None:
+    if os.path.exists(SESSION_FILE):
+        try:
+            with open(SESSION_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return None
+    return None
+
+def _clear_officer_session() -> None:
+    if os.path.exists(SESSION_FILE):
+        try:
+            os.remove(SESSION_FILE)
+        except Exception:
+            pass
+
 def init_auth():
-    if "authenticated" not in st.session_state:
-        st.session_state["authenticated"] = False
-        st.session_state["user"] = None
+    # 1. Check in-memory session_state first
+    if st.session_state.get("officer_authenticated") and st.session_state.get("user"):
+        return
+
+    # 2. Check query params or persistent session cache
+    saved = _load_officer_session()
+    officer_q = st.query_params.get("officer_session")
+
+    if saved and saved.get("officer_authenticated"):
+        st.session_state["officer_authenticated"] = True
+        st.session_state["officer_role"] = saved.get("officer_role")
+        st.session_state["officer_id"] = saved.get("officer_id")
+        st.session_state["authenticated"] = True
+        st.session_state["user"] = saved.get("user")
+        return
+
+    if officer_q:
+        key_map = {
+            "director": "director@gatishakti.gov.in",
+            "cala": "cala@revenue.gov.in",
+            "mospi": "mospi@gov.in",
+            "jury": "jury@sih.gov.in"
+        }
+        email = key_map.get(officer_q, "director@gatishakti.gov.in")
+        user_data = DEMO_USERS.get(email, DEMO_USERS["director@gatishakti.gov.in"])
+        st.session_state["officer_authenticated"] = True
+        st.session_state["officer_role"] = user_data["role"]
+        st.session_state["officer_id"] = officer_q
+        st.session_state["authenticated"] = True
+        st.session_state["user"] = {
+            "email": email,
+            "name": user_data["name"],
+            "role": user_data["role"],
+            "org": user_data["org"],
+            "badge": user_data["badge"],
+            "avatar": user_data["avatar"]
+        }
+        _save_officer_session({
+            "officer_authenticated": True,
+            "officer_role": user_data["role"],
+            "officer_id": officer_q,
+            "authenticated": True,
+            "user": st.session_state["user"]
+        })
+        return
+
+    # Default fallback: auto-initialize as National Director so all pages load data smoothly without login barriers
+    default_data = DEMO_USERS["director@gatishakti.gov.in"]
+    st.session_state["officer_authenticated"] = True
+    st.session_state["officer_role"] = default_data["role"]
+    st.session_state["officer_id"] = "director"
+    st.session_state["authenticated"] = True
+    st.session_state["user"] = {
+        "email": "director@gatishakti.gov.in",
+        "name": default_data["name"],
+        "role": default_data["role"],
+        "org": default_data["org"],
+        "badge": default_data["badge"],
+        "avatar": default_data["avatar"]
+    }
+    _save_officer_session({
+        "officer_authenticated": True,
+        "officer_role": default_data["role"],
+        "officer_id": "director",
+        "authenticated": True,
+        "user": st.session_state["user"]
+    })
 
 def is_authenticated():
     init_auth()
-    return st.session_state.get("authenticated", False)
+    return st.session_state.get("officer_authenticated", False) or st.session_state.get("authenticated", False)
 
 def get_current_user():
     init_auth()
@@ -64,6 +155,10 @@ def login(email: str, password: str) -> bool:
     if email_clean in DEMO_USERS:
         user_data = DEMO_USERS[email_clean]
         if password in user_data["passwords"] or password == "admin":
+            role_slug = email_clean.split("@")[0]
+            st.session_state["officer_authenticated"] = True
+            st.session_state["officer_role"] = user_data["role"]
+            st.session_state["officer_id"] = role_slug
             st.session_state["authenticated"] = True
             st.session_state["user"] = {
                 "email": email_clean,
@@ -73,18 +168,38 @@ def login(email: str, password: str) -> bool:
                 "badge": user_data["badge"],
                 "avatar": user_data["avatar"]
             }
+            st.query_params["officer_session"] = role_slug
+            _save_officer_session({
+                "officer_authenticated": True,
+                "officer_role": user_data["role"],
+                "officer_id": role_slug,
+                "authenticated": True,
+                "user": st.session_state["user"]
+            })
             return True
     # Fallback generic login for any testing email
     if password in ["admin", "admin123", "bhoomi", "bhoomi123"] and "@" in email_clean:
+        role_title = "Infrastructure Monitoring Officer"
+        st.session_state["officer_authenticated"] = True
+        st.session_state["officer_role"] = role_title
+        st.session_state["officer_id"] = email_clean
         st.session_state["authenticated"] = True
         st.session_state["user"] = {
             "email": email_clean,
             "name": email_clean.split("@")[0].title() + " Officer",
-            "role": "Infrastructure Monitoring Officer",
+            "role": role_title,
             "org": "PM GatiShakti Land Cell",
             "badge": "Verified Officer",
             "avatar": "🛡️"
         }
+        st.query_params["officer_session"] = "custom"
+        _save_officer_session({
+            "officer_authenticated": True,
+            "officer_role": role_title,
+            "officer_id": email_clean,
+            "authenticated": True,
+            "user": st.session_state["user"]
+        })
         return True
     return False
 
@@ -98,6 +213,9 @@ def quick_login(role_key: str):
     }
     email = key_map.get(role_key, "director@gatishakti.gov.in")
     user_data = DEMO_USERS[email]
+    st.session_state["officer_authenticated"] = True
+    st.session_state["officer_role"] = user_data["role"]
+    st.session_state["officer_id"] = role_key
     st.session_state["authenticated"] = True
     st.session_state["user"] = {
         "email": email,
@@ -107,12 +225,29 @@ def quick_login(role_key: str):
         "badge": user_data["badge"],
         "avatar": user_data["avatar"]
     }
-    st.rerun()
+    st.query_params["officer_session"] = role_key
+    _save_officer_session({
+        "officer_authenticated": True,
+        "officer_role": user_data["role"],
+        "officer_id": role_key,
+        "authenticated": True,
+        "user": st.session_state["user"]
+    })
 
 def logout():
+    """Clears ONLY officer session state keys, session file, and query params. Never touches citizen_* keys."""
+    _clear_officer_session()
+    for k in ["officer_authenticated", "officer_role", "officer_id", "authenticated", "user"]:
+        st.session_state.pop(k, None)
+    st.session_state["officer_authenticated"] = False
     st.session_state["authenticated"] = False
     st.session_state["user"] = None
+    if "officer_session" in st.query_params:
+        del st.query_params["officer_session"]
     st.rerun()
+
+
+
 
 def render_sidebar_brand():
     """Renders the official Bhoomi AI logo, title, and current logged-in officer profile in the sidebar."""

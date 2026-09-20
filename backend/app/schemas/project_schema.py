@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, List, Dict, Any
+
 
 class ProjectBase(BaseModel):
     project_id: str = Field(..., description="Unique Project Identifier, e.g. PRJ-MH-1001")
@@ -47,8 +48,8 @@ class ProjectResponse(ProjectBase):
     delay_days: Optional[int] = 0
     delay_flag: Optional[int] = 0
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
 
 class PredictionResponse(BaseModel):
     project_id: str

@@ -1,13 +1,15 @@
 import sys
 import os
-import logging
 import streamlit as st
 import pandas as pd
+import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
+import logging
 
 logger = logging.getLogger(__name__)
 
-# Ensure application directory and root are in sys.path
+# ── Path setup ────────────────────────────────────────────────────────────
 PAGE_DIR = os.path.abspath(os.path.dirname(__file__))
 STREAMLIT_DIR = os.path.abspath(os.path.join(PAGE_DIR, ".."))
 ROOT_DIR = os.path.abspath(os.path.join(PAGE_DIR, "..", "..", ".."))
@@ -15,17 +17,41 @@ for p in [PAGE_DIR, STREAMLIT_DIR, ROOT_DIR]:
     if p not in sys.path:
         sys.path.insert(0, p)
 
+LOGO_PATH = os.path.join(STREAMLIT_DIR, "assets", "logo.png")
+
+# ── Imports ───────────────────────────────────────────────────────────────
 try:
     from utils.api_client import client
-    from utils.auth import render_sidebar_brand
+    from utils.gov_theme import (
+        apply_gov_theme,
+        hide_default_sidebar_nav,
+        render_top_navbar,
+        render_gov_footer,
+    )
 except ImportError:
     from frontend.streamlit_app.utils.api_client import client
-    from frontend.streamlit_app.utils.auth import render_sidebar_brand
+    from frontend.streamlit_app.utils.gov_theme import (
+        apply_gov_theme,
+        hide_default_sidebar_nav,
+        render_top_navbar,
+        render_gov_footer,
+    )
+
+try:
+    from auth_guards import require_officer_login
+except ImportError:
+    from frontend.streamlit_app.auth_guards import require_officer_login
 
 st.set_page_config(page_title="AI Root Cause Analysis — Bhoomi AI", page_icon="🧠", layout="wide")
 
-# Render Bhoomi AI logo & sidebar
-render_sidebar_brand()
+apply_gov_theme()
+hide_default_sidebar_nav()
+render_top_navbar(current_slug="SHAP_Explanations", logo_path=LOGO_PATH)
+require_officer_login()
+
+
+
+
 
 st.markdown("""
 <style>
@@ -268,3 +294,5 @@ if chosen_id:
         with col_c:
             st.metric("3. Contextual Multipliers", f"{comp.get('context_component', 0)} / 20")
             st.caption("Litigation, low compensation, low DILRMP land digitization")
+
+render_gov_footer()

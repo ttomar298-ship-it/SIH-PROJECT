@@ -1,5 +1,5 @@
 import os
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "SIH26017 Land Acquisition Delay & Risk Engine"
@@ -8,8 +8,8 @@ class Settings(BaseSettings):
     ALERT_RISK_THRESHOLD: int = 70
     CORS_ORIGINS: list = ["*"]
 
-    class Config:
-        case_sensitive = True
+    model_config = SettingsConfigDict(case_sensitive=True)
 
 settings = Settings()
+
 

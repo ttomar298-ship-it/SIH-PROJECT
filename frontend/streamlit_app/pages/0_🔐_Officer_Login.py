@@ -10,27 +10,39 @@ for p in [PAGE_DIR, STREAMLIT_DIR, ROOT_DIR]:
     if p not in sys.path:
         sys.path.insert(0, p)
 
+LOGO_PATH = os.path.join(STREAMLIT_DIR, "assets", "logo.png")
+
 from utils.auth import (
     is_authenticated,
     get_current_user,
     login,
     quick_login,
     logout,
-    render_sidebar_brand,
     DEMO_USERS,
-    LOGO_PATH,
-    get_logo_base64
+    get_logo_base64,
+)
+from utils.gov_theme import (
+    apply_gov_theme,
+    hide_default_sidebar_nav,
+    render_split_login_header,
+    render_gov_footer,
 )
 
 st.set_page_config(
     page_title="Officer Login — Bhoomi AI",
     page_icon="🌱",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed",
 )
 
-# Render global sidebar brand with logo
-render_sidebar_brand()
+apply_gov_theme()
+hide_default_sidebar_nav()
+render_split_login_header(
+    logo_path=LOGO_PATH,
+    title="Officer Login",
+    subtitle="Role-based access for authorized government officials",
+)
+
 
 # Custom CSS for Login Portal
 st.markdown("""
@@ -99,31 +111,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Top Brand Header Banner
-col_l, col_r = st.columns([1, 4])
-with col_l:
-    if os.path.exists(LOGO_PATH):
-        st.image(LOGO_PATH, width=170)
-    else:
-        st.markdown("# 🌱")
-with col_r:
-    st.markdown("""
-    <div style="padding-top: 10px;">
-        <h1 style="margin: 0; font-size: 2.3rem; font-weight: 800; color: #064E3B; letter-spacing: -0.5px;">
-            BHOOMI <span style="color: #10B981;">AI</span>
-        </h1>
-        <div style="font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; color: #047857; margin-top: 2px;">
-            LAND • DATA • BETTER TOMORROW
-        </div>
-        <div style="font-size: 0.95rem; color: #475569; margin-top: 4px;">
-            National Infrastructure Land Acquisition & Delay Intelligence Portal • PM GatiShakti
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("<hr style='margin: 16px 0 24px 0; border: 0.5px solid #E2E8F0;'>", unsafe_allow_html=True)
-
 user = get_current_user()
+
 
 if is_authenticated() and user:
     st.success(f"✅ **Session Active:** Logged in as **{user['name']}** ({user['role']})")
@@ -153,13 +142,12 @@ if is_authenticated() and user:
         st.markdown("#### Session Controls")
         if st.button("🚪 Sign Out of Bhoomi AI", width="stretch", type="secondary"):
             logout()
-            st.rerun()
             
         st.markdown("---")
         st.markdown("**Quick Navigation:**")
         col_nav1, col_nav2 = st.columns(2)
         with col_nav1:
-            st.page_link("Home.py", label="Home Dashboard", icon="🏠", width="stretch")
+            st.page_link("pages/Officer_Dashboard.py", label="Officer Dashboard", icon="🏛️", width="stretch")
             st.page_link("pages/4_🗺️_GIS_Map.py", label="GIS Risk Map", icon="🗺️", width="stretch")
         with col_nav2:
             st.page_link("pages/2_🏆_Risk_Ranking.py", label="Risk Ranking", icon="🏆", width="stretch")
@@ -189,6 +177,7 @@ with tab_quick:
         """, unsafe_allow_html=True)
         if st.button("Log In as Director", key="btn_login_director", width="stretch", type="primary"):
             quick_login("director")
+            st.switch_page("pages/Officer_Dashboard.py")
 
     with col2:
         st.markdown("""
@@ -201,6 +190,7 @@ with tab_quick:
         """, unsafe_allow_html=True)
         if st.button("Log In as CALA", key="btn_login_cala", width="stretch", type="primary"):
             quick_login("cala")
+            st.switch_page("pages/Officer_Dashboard.py")
 
     with col3:
         st.markdown("""
@@ -213,6 +203,7 @@ with tab_quick:
         """, unsafe_allow_html=True)
         if st.button("Log In as MoSPI", key="btn_login_mospi", width="stretch", type="primary"):
             quick_login("mospi")
+            st.switch_page("pages/Officer_Dashboard.py")
 
     with col4:
         st.markdown("""
@@ -225,6 +216,7 @@ with tab_quick:
         """, unsafe_allow_html=True)
         if st.button("Log In as SIH Jury", key="btn_login_jury", width="stretch", type="primary"):
             quick_login("jury")
+            st.switch_page("pages/Officer_Dashboard.py")
 
 with tab_form:
     st.markdown("#### Enter Official Email & Password")
@@ -235,11 +227,13 @@ with tab_form:
         submit_btn = st.form_submit_button("Authenticate Officer 🛡️", width="stretch", type="primary")
         
         if submit_btn:
+            # TODO: replace with real credential verification backend service
             if login(f_email, f_pass):
-                st.success("✅ Authentication successful! Redirecting...")
-                st.rerun()
+                st.switch_page("pages/Officer_Dashboard.py")
             else:
                 st.error("❌ Invalid credentials. You can use 1-click test roles in the first tab or enter password `admin`.")
+
+
 
 # Security & Compliance Footer
 st.markdown("<br>", unsafe_allow_html=True)
@@ -253,4 +247,7 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
+render_gov_footer()
+
 

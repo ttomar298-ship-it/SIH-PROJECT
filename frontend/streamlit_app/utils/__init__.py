@@ -10,6 +10,19 @@ from .auth import (
     LOGO_PATH
 )
 from .config import USE_LIVE_API, get_dataset_metadata
+from .gov_theme import (
+    apply_gov_theme,
+    hide_default_sidebar_nav,
+    render_top_navbar,
+    render_citizen_navbar,
+    render_split_login_header,
+    render_role_selection_landing,
+    render_gov_header,
+    render_breadcrumb,
+    status_pill,
+    render_gov_footer,
+    NAV_ITEMS
+)
 
 __all__ = [
     "client",
@@ -23,6 +36,17 @@ __all__ = [
     "DEMO_USERS",
     "LOGO_PATH",
     "USE_LIVE_API",
-    "get_dataset_metadata"
+    "get_dataset_metadata",
+    "apply_gov_theme",
+    "hide_default_sidebar_nav",
+    "render_top_navbar",
+    "render_citizen_navbar",
+    "render_split_login_header",
+    "render_role_selection_landing",
+    "render_gov_header",
+    "render_breadcrumb",
+    "status_pill",
+    "render_gov_footer",
+    "NAV_ITEMS",
 ]
 
