@@ -70,12 +70,12 @@ def render_role_selection_landing(
 <style>
 /* Landing Page Specific Styling */
 .landing-hero-band {{
-    background: linear-gradient(135deg, #001A52 0%, #00256E 50%, #003087 100%);
+    background: linear-gradient(135deg, #064E3B 0%, #065F46 50%, #047857 100%);
     border-radius: 12px;
     padding: 32px 28px 24px 28px;
     color: #FFFFFF;
     text-align: center;
-    box-shadow: 0 10px 25px -5px rgba(0, 48, 135, 0.25);
+    box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.25);
     margin-bottom: 28px;
     position: relative;
     overflow: hidden;
@@ -101,7 +101,7 @@ def render_role_selection_landing(
 }}
 .landing-subtitle {{
     font-size: 1.05rem;
-    color: #93C5FD;
+    color: #A7F3D0;
     font-weight: 500;
     max-width: 680px;
     margin: 0 auto;
@@ -109,7 +109,7 @@ def render_role_selection_landing(
 }}
 .landing-trust {{
     font-size: 0.78rem;
-    color: #BFDBFE;
+    color: #D1FAE5;
     margin-top: 10px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -132,10 +132,10 @@ def render_role_selection_landing(
 }}
 .role-select-card:hover {{
     transform: translateY(-4px);
-    box-shadow: 0 20px 30px -10px rgba(0, 48, 135, 0.15), 0 8px 10px -4px rgba(0, 48, 135, 0.08);
+    box-shadow: 0 20px 30px -10px rgba(6, 95, 70, 0.15), 0 8px 10px -4px rgba(6, 95, 70, 0.08);
 }}
 .role-card-officer:hover {{
-    border-color: #003087;
+    border-color: #059669;
 }}
 .role-card-citizen:hover {{
     border-color: #10B981;
@@ -152,9 +152,9 @@ def render_role_selection_landing(
     margin: 0 auto 16px auto;
 }}
 .icon-badge-blue {{
-    background: #DBEAFE;
-    color: #1E40AF;
-    border: 1.5px solid #BFDBFE;
+    background: #DCFCE7;
+    color: #065F46;
+    border: 1.5px solid #A7F3D0;
 }}
 .icon-badge-green {{
     background: #DCFCE7;
@@ -195,7 +195,7 @@ def render_role_selection_landing(
 
 /* Custom buttons styling */
 div[data-testid="stButton"] > button.officer-btn {{
-    background-color: #003087 !important;
+    background-color: #065F46 !important;
     color: #FFFFFF !important;
     border: none !important;
     font-weight: 700 !important;
@@ -412,8 +412,8 @@ def render_top_navbar(
 
 
     st.markdown(f"""
-<div style="background:linear-gradient(135deg,#003087 0%,#001A52 100%);
-     padding:0 24px; box-shadow:0 4px 16px rgba(0,48,135,0.3);
+<div style="background:linear-gradient(135deg,#064E3B 0%,#065F46 55%,#047857 100%);
+     padding:0 24px; box-shadow:0 4px 16px rgba(6,78,59,0.35);
      position:sticky; top:0; z-index:9999;">
   <div style="display:flex;align-items:center;justify-content:space-between;
        min-height:64px;flex-wrap:wrap;gap:8px;">
@@ -423,7 +423,7 @@ def render_top_navbar(
       <div>
         <div style="font-size:1.15rem;font-weight:800;color:#FFFFFF;
              letter-spacing:-0.3px;line-height:1.1;">{site_title}</div>
-        <div style="font-size:0.68rem;color:#93C5FD;font-weight:500;
+        <div style="font-size:0.68rem;color:#D1FAE5;font-weight:500;
              letter-spacing:0.5px;">{site_subtitle}</div>
       </div>
     </div>
@@ -548,9 +548,9 @@ def render_split_login_header(
         )
 
     st.markdown(f"""
-<div style="background:linear-gradient(135deg,#003087 0%,#001A52 100%);
+<div style="background:linear-gradient(135deg,#064E3B 0%,#065F46 55%,#047857 100%);
      padding:24px 28px 0 28px;
-     box-shadow:0 4px 16px rgba(0,48,135,0.3);">
+     box-shadow:0 4px 16px rgba(6,78,59,0.35);">
   <div style="display:flex;align-items:center;gap:20px;padding-bottom:20px;">
     <div style="flex-shrink:0;background:rgba(255,255,255,0.12);
          border-radius:12px;padding:10px;border:1px solid rgba(255,255,255,0.2);">
@@ -559,8 +559,8 @@ def render_split_login_header(
     <div>
       <div style="font-size:1.8rem;font-weight:800;color:#FFFFFF;
            letter-spacing:-0.5px;line-height:1.1;">{title}</div>
-      <div style="font-size:0.9rem;color:#93C5FD;margin-top:4px;">{subtitle}</div>
-      <div style="font-size:0.72rem;color:#BFDBFE;margin-top:4px;font-style:italic;">
+      <div style="font-size:0.9rem;color:#A7F3D0;margin-top:4px;">{subtitle}</div>
+      <div style="font-size:0.72rem;color:#D1FAE5;margin-top:4px;font-style:italic;">
         BHOOMI AI • PM GatiShakti National Master Plan • SIH26017
       </div>
     </div>
@@ -610,14 +610,14 @@ html, body, [class*="css"] {
 .gov-tricolor-strip .white   { background: #FFFFFF; flex: 1; }
 .gov-tricolor-strip .green   { background: #138808; flex: 1; }
 
-/* ── Navy GOI Header ─────────────────────────────────────────────────────── */
+/* ── Emerald GOI Header ─────────────────────────────────────────────────── */
 .gov-header {
-    background: linear-gradient(135deg, #003087 0%, #00256E 60%, #001A52 100%);
+    background: linear-gradient(135deg, #064E3B 0%, #065F46 60%, #047857 100%);
     padding: 18px 28px 14px 28px;
     border-radius: 0 0 0 0;
     color: #FFFFFF;
     margin-bottom: 0;
-    box-shadow: 0 4px 12px rgba(0, 48, 135, 0.25);
+    box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
 }
 .gov-header-inner {
     display: flex;
@@ -643,13 +643,13 @@ html, body, [class*="css"] {
 .gov-header-ministry {
     font-size: 0.82rem;
     font-weight: 500;
-    color: #93C5FD;
+    color: #A7F3D0;
     margin-top: 3px;
     letter-spacing: 0.4px;
 }
 .gov-header-tagline {
     font-size: 0.72rem;
-    color: #BFDBFE;
+    color: #D1FAE5;
     margin-top: 2px;
     font-style: italic;
 }
@@ -666,14 +666,14 @@ html, body, [class*="css"] {
     border-radius: 20px;
     font-size: 0.72rem;
     font-weight: 600;
-    color: #E0F2FE;
+    color: #ECFDF5;
     backdrop-filter: blur(4px);
 }
 
 /* ── Breadcrumb Nav ──────────────────────────────────────────────────────── */
 .gov-breadcrumb {
-    background: #F0F4FF;
-    border-bottom: 1px solid #CBD5E1;
+    background: #F0FDF4;
+    border-bottom: 1px solid #BBF7D0;
     padding: 8px 28px;
     font-size: 0.8rem;
     color: #475569;
@@ -683,7 +683,7 @@ html, body, [class*="css"] {
     flex-wrap: wrap;
 }
 .gov-breadcrumb a, .gov-breadcrumb .bc-item {
-    color: #003087;
+    color: #065F46;
     text-decoration: none;
     font-weight: 600;
 }
@@ -708,18 +708,19 @@ html, body, [class*="css"] {
     line-height: 1.6;
 }
 .status-complete    { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
-.status-in_progress { background: #DBEAFE; color: #1E40AF; border: 1px solid #BFDBFE; }
+.status-in_progress { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
 .status-delayed     { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
 .status-not_started { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
 
 /* ── GOI Footer ──────────────────────────────────────────────────────────── */
 .gov-footer {
     margin-top: 40px;
-    background: #003087;
+    background: linear-gradient(135deg, #064E3B 0%, #065F46 60%, #047857 100%);
     border-radius: 8px;
     padding: 16px 24px;
-    color: #BFDBFE;
+    color: #D1FAE5;
     font-size: 0.78rem;
+    box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
 }
 .gov-footer-inner {
     display: flex;
@@ -745,7 +746,7 @@ html, body, [class*="css"] {
 }
 .gov-footer-subtitle {
     font-size: 0.7rem;
-    color: #93C5FD;
+    color: #A7F3D0;
     margin-top: 2px;
 }
 .gov-footer-links {
@@ -755,13 +756,13 @@ html, body, [class*="css"] {
     flex-wrap: wrap;
 }
 .gov-footer-links a {
-    color: #BFDBFE;
+    color: #D1FAE5;
     text-decoration: underline;
     font-size: 0.72rem;
 }
 .gov-footer-disclaimer {
     font-size: 0.68rem;
-    color: #93C5FD;
+    color: #D1FAE5;
     margin-top: 10px;
     padding-top: 8px;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -903,7 +904,7 @@ def render_gov_footer() -> None:
             </div>
         </div>
         <div class="gov-footer-right">
-            <div style="font-size: 0.72rem; color: #93C5FD;">
+            <div style="font-size: 0.72rem; color: #A7F3D0;">
                 🏛️ Ministry of Road Transport &amp; Highways<br>
                 🧠 Powered by XGBoost + TreeSHAP<br>
                 📊 MoSPI Mega Infrastructure Dataset<br>

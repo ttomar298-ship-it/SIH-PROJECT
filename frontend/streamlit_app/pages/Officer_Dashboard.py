@@ -69,26 +69,26 @@ st.markdown("""
     
     /* Hero Banner */
     .hero-container {
-        background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #1E3A8A 100%);
+        background: linear-gradient(135deg, #064E3B 0%, #065F46 50%, #047857 100%);
         border-radius: 16px;
         padding: 28px 36px;
         margin-bottom: 24px;
         color: white;
-        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.15);
     }
     .hero-title {
         font-size: 2.2rem;
         font-weight: 800;
         letter-spacing: -0.5px;
         margin: 0;
-        background: linear-gradient(90deg, #FFFFFF, #93C5FD);
+        background: linear-gradient(90deg, #FFFFFF, #A7F3D0);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
     .hero-subtitle {
         font-size: 1.05rem;
-        color: #94A3B8;
+        color: #D1FAE5;
         margin-top: 6px;
         max-width: 800px;
         line-height: 1.5;
@@ -279,7 +279,7 @@ with col_chart_left:
         y="Milestone Stage",
         orientation="h",
         color="Number of Projects",
-        color_continuous_scale=["#93C5FD", "#1E3A8A"],
+        color_continuous_scale=["#A7F3D0", "#065F46"],
         text="Number of Projects"
     )
     fig_bar.update_layout(

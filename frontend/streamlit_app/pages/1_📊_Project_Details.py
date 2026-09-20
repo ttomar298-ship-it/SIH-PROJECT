@@ -59,12 +59,13 @@ st.markdown("""
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
     
     .detail-hero {
-        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+        background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
         border-radius: 14px;
         padding: 24px;
         color: white;
         margin-bottom: 20px;
-        border: 1px solid #334155;
+        border: 1px solid #047857;
+        box-shadow: 0 8px 20px -4px rgba(6, 78, 59, 0.2);
     }
     .metric-panel {
         background: #F8FAFC;

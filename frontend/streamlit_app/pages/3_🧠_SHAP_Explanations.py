@@ -62,7 +62,7 @@ st.markdown("""
         background: #F8FAFC;
         border-radius: 12px;
         padding: 20px 24px;
-        border-left: 6px solid #3B82F6;
+        border-left: 6px solid #059669;
         margin-bottom: 24px;
     }
     .factor-card {

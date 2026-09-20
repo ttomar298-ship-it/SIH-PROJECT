@@ -101,12 +101,12 @@ st.markdown("""
     }
     
     .active-profile-card {
-        background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
         color: white;
         border-radius: 16px;
         padding: 24px;
-        border: 1px solid #334155;
-        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2);
+        border: 1px solid #047857;
+        box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.25);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -126,13 +126,13 @@ if is_authenticated() and user:
                     {user['avatar']}
                 </div>
                 <div>
-                    <span style="background: #065F46; color: #6EE7B7; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; text-transform: uppercase;">
+                    <span style="background: #047857; color: #6EE7B7; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; text-transform: uppercase;">
                         {user['badge']}
                     </span>
                     <h2 style="margin: 6px 0 2px 0; font-size: 1.4rem; color: #F8FAFC;">{user['name']}</h2>
-                    <div style="color: #93C5FD; font-weight: 600; font-size: 0.9rem;">{user['role']}</div>
-                    <div style="color: #94A3B8; font-size: 0.8rem; margin-top: 2px;">{user['org']}</div>
-                    <div style="color: #64748B; font-size: 0.75rem; margin-top: 4px;">Official ID: <code>{user['email']}</code></div>
+                    <div style="color: #A7F3D0; font-weight: 600; font-size: 0.9rem;">{user['role']}</div>
+                    <div style="color: #D1FAE5; font-size: 0.8rem; margin-top: 2px;">{user['org']}</div>
+                    <div style="color: #BBF7D0; font-size: 0.75rem; margin-top: 4px;">Official ID: <code>{user['email']}</code></div>
                 </div>
             </div>
         </div>
@@ -172,7 +172,7 @@ with tab_quick:
             <div class="role-icon">🏛️</div>
             <div class="role-title">National Director</div>
             <div class="role-dept">PM GatiShakti National Master Plan (DPIIT)</div>
-            <span style="font-size: 0.7rem; background: #DBEAFE; color: #1E40AF; padding: 2px 8px; border-radius: 8px; font-weight: 600;">Full Access</span>
+            <span style="font-size: 0.7rem; background: #DCFCE7; color: #166534; padding: 2px 8px; border-radius: 8px; font-weight: 600;">Full Access</span>
         </div>
         """, unsafe_allow_html=True)
         if st.button("Log In as Director", key="btn_login_director", width="stretch", type="primary"):

@@ -272,7 +272,7 @@ def render_sidebar_brand():
         if user:
             st.markdown(
                 f"""
-                <div style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; border: 1px solid #334155; color: white;">
+                <div style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; border: 1px solid #047857; color: white;">
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <div style="font-size: 1.8rem; background: rgba(255,255,255,0.1); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
                             {user['avatar']}

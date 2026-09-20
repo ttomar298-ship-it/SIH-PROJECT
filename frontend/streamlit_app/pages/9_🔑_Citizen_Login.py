@@ -51,6 +51,10 @@ render_split_login_header(
 # Citizen keys: 'citizen_authenticated', 'citizen_identifier',
 #               'citizen_otp', 'citizen_otp_ts', 'citizen_pending_id'
 
+if "citizen_session" in st.query_params and not st.session_state.get("citizen_authenticated"):
+    st.session_state["citizen_authenticated"] = True
+    st.session_state["citizen_identifier"] = st.query_params.get("citizen_id", "Citizen User")
+
 # ── Already logged in? ───────────────────────────────────────────────────────
 if st.session_state.get("citizen_authenticated", False):
     cid = st.session_state.get("citizen_identifier", "")
