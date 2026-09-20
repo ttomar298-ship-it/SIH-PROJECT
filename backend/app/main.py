@@ -11,6 +11,7 @@ if BASE_DIR not in sys.path:
 from backend.app.core.config import settings
 from backend.app.db.crud import init_and_seed_db
 from backend.app.api.routes import router as api_router
+from backend.app.api.public_routes import router as public_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -40,6 +41,7 @@ app.add_middleware(
 
 # Register routes
 app.include_router(api_router, tags=["SIH26017 Core Endpoints"])
+app.include_router(public_router, prefix="/api/public", tags=["Citizen Public Portal"])
 
 @app.get("/", tags=["System"])
 def root():

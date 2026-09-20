@@ -118,6 +118,124 @@ class EmailAlertService:
                 "message": f"SMTP dispatch failed: {str(e)}"
             }
 
+    def send_citizen_objection_receipt(self, objection_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Sends an official email acknowledgement to a citizen upon lodging an objection/grievance.
+        """
+        to_email = objection_data.get("email")
+        if not to_email:
+            return {"status": "skipped", "message": "No email provided by citizen"}
+
+        objection_id = objection_data.get("objection_id", "OBJ-NEW")
+        citizen_name = objection_data.get("citizen_name", "Valued Citizen")
+        khasra = objection_data.get("khasra_number", "N/A")
+        village = objection_data.get("village", "N/A")
+        category = objection_data.get("objection_category", "Land Acquisition Grievance")
+        filed_at = objection_data.get("filed_at", "Today")
+
+        subject = f"[BHOOMI AI] Acknowledgement: Objection {objection_id} Registered (RFCTLARR Sec 15)"
+
+        html_body = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #1F2937;">
+            <div style="max-width: 600px; margin: 0 auto; border: 1px solid #E5E7EB; border-radius: 8px; overflow: hidden;">
+                <div style="background-color: #059669; color: white; padding: 18px 24px;">
+                    <h2 style="margin: 0; font-size: 20px;">🌱 BHOOMI AI — Official Citizen Grievance Acknowledgement</h2>
+                    <p style="margin: 4px 0 0 0; font-size: 13px; opacity: 0.9;">Competent Authority Land Acquisition (CALA) Citizen Cell</p>
+                </div>
+                <div style="padding: 24px;">
+                    <p>Dear <strong>{citizen_name}</strong>,</p>
+                    <p>Your objection / grievance has been officially registered in the BHOOMI AI Land Records System under the provisions of the <strong>RFCTLARR Act, 2013</strong>.</p>
+                    
+                    <div style="background-color: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; padding: 14px; margin: 16px 0;">
+                        <span style="font-size: 13px; color: #166534; font-weight: bold;">OFFICIAL TRACKING IDENTIFIER:</span><br>
+                        <span style="font-size: 22px; font-weight: bold; color: #15803D; letter-spacing: 1px;">{objection_id}</span>
+                    </div>
+
+                    <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px;">
+                        <tr style="border-bottom: 1px solid #E5E7EB;">
+                            <td style="padding: 8px 0; font-weight: bold; color: #4B5563;">Khasra Number:</td>
+                            <td style="padding: 8px 0;">{khasra}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E5E7EB;">
+                            <td style="padding: 8px 0; font-weight: bold; color: #4B5563;">Village / District:</td>
+                            <td style="padding: 8px 0;">{village}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E5E7EB;">
+                            <td style="padding: 8px 0; font-weight: bold; color: #4B5563;">Category:</td>
+                            <td style="padding: 8px 0;">{category}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E5E7EB;">
+                            <td style="padding: 8px 0; font-weight: bold; color: #4B5563;">Date Filed:</td>
+                            <td style="padding: 8px 0;">{filed_at}</td>
+                        </tr>
+                    </table>
+
+                    <div style="background-color: #FEF3C7; border-left: 4px solid #F59E0B; padding: 12px 16px; border-radius: 0 6px 6px 0; margin-top: 18px;">
+                        <strong style="color: #92400E;">Statutory Timeline (Section 15):</strong><br>
+                        <span style="font-size: 13px; color: #78350F;">
+                            Under Section 15(2) of the RFCTLARR Act, 2013, the Collector / CALA is required to provide an opportunity of being heard and pass a reasoned order. Expected hearing notice within 60 days.
+                        </span>
+                    </div>
+                </div>
+                <div style="background-color: #F9FAFB; padding: 12px 24px; font-size: 12px; color: #6B7280; text-align: center;">
+                    BHOOMI AI Citizen Portal • SIH26017 Public Services • MoRTH & DPIIT
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+
+        if not self.smtp_user or not self.smtp_password:
+            return {
+                "status": "success",
+                "mode": "simulated",
+                "recipient": to_email,
+                "subject": subject,
+                "message": f"Simulated citizen acknowledgement dispatched to {to_email}"
+            }
+
+        try:
+            msg = MIMEMultipart("alternative")
+            msg["Subject"] = subject
+            msg["From"] = self.sender_email
+            msg["To"] = to_email
+            msg.attach(MIMEText(html_body, "html"))
+
+            with smtplib.SMTP(self.smtp_host, self.smtp_port) as server:
+                server.starttls()
+                server.login(self.smtp_user, self.smtp_password)
+                server.sendmail(self.sender_email, to_email, msg.as_string())
+
+            return {
+                "status": "success",
+                "mode": "live_smtp",
+                "recipient": to_email,
+                "subject": subject,
+                "message": f"Citizen acknowledgement delivered to {to_email}"
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "mode": "live_smtp",
+                "recipient": to_email,
+                "error": str(e),
+                "message": f"Citizen email dispatch failed: {str(e)}"
+            }
+
+    def send_sms_notification(self, mobile_number: str, text: str) -> Dict[str, Any]:
+        """
+        SMS notification gateway stub for Citizen updates.
+        In production, connects to CDAC / NIC SMS Gateway.
+        """
+        print(f"[CITIZEN SMS GATEWAY] Dispatched SMS to +91-{mobile_number}: '{text}'", flush=True)
+        return {
+            "status": "success",
+            "provider": "NIC_SMS_GATEWAY_STUB",
+            "mobile": mobile_number,
+            "message": text
+        }
+
 _email_service_instance = None
 
 def get_email_service() -> EmailAlertService:
@@ -125,4 +243,5 @@ def get_email_service() -> EmailAlertService:
     if _email_service_instance is None:
         _email_service_instance = EmailAlertService()
     return _email_service_instance
+
 

@@ -101,6 +101,37 @@ class APIClient:
                 pass
         return {}
 
+    def track_citizen_status(
+        self,
+        project_id: Optional[str] = None,
+        khasra_number: Optional[str] = None,
+        village: Optional[str] = None,
+        district: Optional[str] = None,
+        mobile_number: Optional[str] = None
+    ) -> Dict[str, Any]:
+        url = f"{self.base_url}/api/public/track"
+        params = {}
+        if project_id:
+            params["project_id"] = project_id.strip()
+        if khasra_number:
+            params["khasra_number"] = khasra_number.strip()
+        if village:
+            params["village"] = village.strip()
+        if district:
+            params["district"] = district.strip()
+        if mobile_number:
+            params["mobile_number"] = mobile_number.strip()
+        res = requests.get(url, params=params, timeout=10)
+        res.raise_for_status()
+        return res.json()
+
+    def submit_citizen_objection(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        url = f"{self.base_url}/api/public/objections"
+        res = requests.post(url, json=payload, timeout=10)
+        res.raise_for_status()
+        return res.json()
+
 # Global client singleton
 client = APIClient()
+
 
