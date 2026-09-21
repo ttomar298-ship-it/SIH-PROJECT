@@ -52,122 +52,124 @@ with _logout_col:
 
 
 st.markdown("""
+
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap');
-    
-    * {
-        font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
-    }
-    
-    /* Citizen Hero Banner */
-    .citizen-hero {
-        background: linear-gradient(135deg, #064E3B 0%, #065F46 45%, #047857 100%);
-        border-radius: 16px;
-        padding: 26px 32px;
-        color: white;
-        margin-bottom: 24px;
-        box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    .citizen-hero h1 {
-        color: #FFFFFF;
-        font-size: 2.1rem;
-        font-weight: 800;
-        margin: 0;
-        letter-spacing: -0.5px;
-    }
-    .citizen-hero p {
-        color: #A7F3D0;
-        font-size: 1.05rem;
-        margin-top: 6px;
-        margin-bottom: 12px;
-    }
-    .citizen-badge {
-        background: rgba(255, 255, 255, 0.18);
-        padding: 4px 14px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        display: inline-block;
-        margin-right: 8px;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap');
 
-    /* Timeline Step Card */
-    .timeline-card {
-        background: white;
-        border-radius: 12px;
-        padding: 16px;
-        border: 1px solid #E2E8F0;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-    }
-    .timeline-active {
-        border: 2px solid #059669 !important;
-        background: #F0FDF4 !important;
-        box-shadow: 0 6px 16px -2px rgba(5, 150, 105, 0.15);
-    }
-    .timeline-completed {
-        border-left: 4px solid #10B981 !important;
-        background: #F8FAFC;
-    }
-    .timeline-upcoming {
-        opacity: 0.7;
-        background: #FAFAFA;
-    }
+* {
+font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+}
 
-    /* Compensation Card */
-    .comp-card {
-        background: white;
-        border-radius: 14px;
-        padding: 22px;
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    }
-    .comp-metric-label {
-        font-size: 0.82rem;
-        color: #64748B;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .comp-metric-val {
-        font-size: 1.7rem;
-        font-weight: 800;
-        color: #0F172A;
-        margin: 4px 0 2px 0;
-    }
-    .solatium-tag {
-        background: #DCFCE7;
-        color: #166534;
-        font-size: 0.72rem;
-        padding: 3px 8px;
-        border-radius: 6px;
-        font-weight: 700;
-    }
+/* Citizen Hero Banner */
+.citizen-hero {
+background: linear-gradient(135deg, #064E3B 0%, #065F46 45%, #047857 100%);
+border-radius: 16px;
+padding: 26px 32px;
+color: white;
+margin-bottom: 24px;
+box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.25);
+border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.citizen-hero h1 {
+color: #FFFFFF;
+font-size: 2.1rem;
+font-weight: 800;
+margin: 0;
+letter-spacing: -0.5px;
+}
+.citizen-hero p {
+color: #A7F3D0;
+font-size: 1.05rem;
+margin-top: 6px;
+margin-bottom: 12px;
+}
+.citizen-badge {
+background: rgba(255, 255, 255, 0.18);
+padding: 4px 14px;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 600;
+border: 1px solid rgba(255, 255, 255, 0.25);
+display: inline-block;
+margin-right: 8px;
+}
 
-    /* Rights Card */
-    .rights-card {
-        background: #F8FAFC;
-        border-radius: 12px;
-        padding: 16px 18px;
-        border-left: 4px solid #059669;
-        margin-bottom: 12px;
-    }
+/* Timeline Step Card */
+.timeline-card {
+background: white;
+border-radius: 12px;
+padding: 16px;
+border: 1px solid #E2E8F0;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+position: relative;
+}
+.timeline-active {
+border: 2px solid #059669 !important;
+background: #F0FDF4 !important;
+box-shadow: 0 6px 16px -2px rgba(5, 150, 105, 0.15);
+}
+.timeline-completed {
+border-left: 4px solid #10B981 !important;
+background: #F8FAFC;
+}
+.timeline-upcoming {
+opacity: 0.7;
+background: #FAFAFA;
+}
 
-    /* Section 24 Lapse Warning Alert */
-    .lapse-alert {
-        background: #FFFBEB;
-        border-left: 6px solid #D97706;
-        border-radius: 8px;
-        padding: 16px 20px;
-        margin-bottom: 20px;
-        color: #92400E;
-    }
+/* Compensation Card */
+.comp-card {
+background: white;
+border-radius: 14px;
+padding: 22px;
+border: 1px solid #E2E8F0;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+.comp-metric-label {
+font-size: 0.82rem;
+color: #64748B;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.comp-metric-val {
+font-size: 1.7rem;
+font-weight: 800;
+color: #0F172A;
+margin: 4px 0 2px 0;
+}
+.solatium-tag {
+background: #DCFCE7;
+color: #166534;
+font-size: 0.72rem;
+padding: 3px 8px;
+border-radius: 6px;
+font-weight: 700;
+}
+
+/* Rights Card */
+.rights-card {
+background: #F8FAFC;
+border-radius: 12px;
+padding: 16px 18px;
+border-left: 4px solid #059669;
+margin-bottom: 12px;
+}
+
+/* Section 24 Lapse Warning Alert */
+.lapse-alert {
+background: #FFFBEB;
+border-left: 6px solid #D97706;
+border-radius: 8px;
+padding: 16px 20px;
+margin-bottom: 20px;
+color: #92400E;
+}
 </style>
+
 """, unsafe_allow_html=True)
 
 # Sidebar: Dedicated Citizen Portal Controls (zero officer session coupling)
@@ -175,13 +177,15 @@ with st.sidebar:
     st.markdown("### 🌾 **BHOOMI AI**")
     st.markdown(
         """
-        <div style="font-size: 0.75rem; letter-spacing: 1.5px; color: #047857; font-weight: 800; margin-top: -8px;">
-            CITIZEN LAND ACCESS PORTAL
-        </div>
-        <div style="font-size: 0.70rem; color: #64748B; margin-bottom: 16px;">
-            RFCTLARR Act, 2013 Public Transparency Service
-        </div>
-        """,
+
+<div style="font-size: 0.75rem; letter-spacing: 1.5px; color: #047857; font-weight: 800; margin-top: -8px;">
+CITIZEN LAND ACCESS PORTAL
+</div>
+<div style="font-size: 0.70rem; color: #64748B; margin-bottom: 16px;">
+RFCTLARR Act, 2013 Public Transparency Service
+</div>
+
+""",
         unsafe_allow_html=True
     )
 
@@ -199,15 +203,17 @@ with st.sidebar:
     st.markdown("#### 📞 **Citizen Grievance Helpline**")
     st.markdown(
         """
-        <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 12px; font-size: 0.82rem; color: #166534;">
-            <strong>Toll-Free Helpline:</strong><br>
-            📞 1800-11-2013 (MoRTH Land Cell)<br><br>
-            <strong>Email Redressal:</strong><br>
-            ✉️ grievance.rfctlarr@gov.in<br><br>
-            <strong>Working Hours:</strong><br>
-            Mon – Fri: 09:30 AM – 06:00 PM
-        </div>
-        """,
+
+<div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 12px; font-size: 0.82rem; color: #166534;">
+<strong>Toll-Free Helpline:</strong><br>
+📞 1800-11-2013 (MoRTH Land Cell)<br><br>
+<strong>Email Redressal:</strong><br>
+✉️ grievance.rfctlarr@gov.in<br><br>
+<strong>Working Hours:</strong><br>
+Mon – Fri: 09:30 AM – 06:00 PM
+</div>
+
+""",
         unsafe_allow_html=True
     )
 
@@ -277,13 +283,15 @@ t = TEXTS["hi"] if is_hi else TEXTS["en"]
 
 # Top Hero Banner
 st.markdown(f"""
+
 <div class="citizen-hero">
-    <span class="citizen-badge">🏛️ {t['badge']}</span>
-    <span class="citizen-badge">🔒 Whitelisted Public Data</span>
-    <span class="citizen-badge">⚖️ 100% Solatium Guaranteed</span>
-    <h1 style="margin-top: 10px;">{t['title']}</h1>
-    <p>{t['subtitle']}</p>
+<span class="citizen-badge">🏛️ {t['badge']}</span>
+<span class="citizen-badge">🔒 Whitelisted Public Data</span>
+<span class="citizen-badge">⚖️ 100% Solatium Guaranteed</span>
+<h1 style="margin-top: 10px;">{t['title']}</h1>
+<p>{t['subtitle']}</p>
 </div>
+
 """, unsafe_allow_html=True)
 
 # Quick Demo Preset Helper
@@ -410,20 +418,22 @@ if data:
     if data.get("section_24_lapse_risk"):
         lapse_text = data.get("section_24_details_hi" if is_hi else "section_24_details")
         st.markdown(f"""
-        <div class="lapse-alert">
-            <div style="display: flex; align-items: flex-start; gap: 12px;">
-                <span style="font-size: 1.8rem;">🚨</span>
-                <div>
-                    <strong style="font-size: 1.05rem; letter-spacing: 0.3px;">
-                        {'वैधानिक सूचना: धारा 24(2) के तहत अधिग्रहण व्यपगत जोखिम' if is_hi else 'STATUTORY NOTICE: Section 24(2) Acquisition Lapse Flag'}
-                    </strong>
-                    <p style="margin: 6px 0 0 0; font-size: 0.92rem; line-height: 1.5;">
-                        {lapse_text}
-                    </p>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+
+<div class="lapse-alert">
+<div style="display: flex; align-items: flex-start; gap: 12px;">
+<span style="font-size: 1.8rem;">🚨</span>
+<div>
+<strong style="font-size: 1.05rem; letter-spacing: 0.3px;">
+{'वैधानिक सूचना: धारा 24(2) के तहत अधिग्रहण व्यपगत जोखिम' if is_hi else 'STATUTORY NOTICE: Section 24(2) Acquisition Lapse Flag'}
+</strong>
+<p style="margin: 6px 0 0 0; font-size: 0.92rem; line-height: 1.5;">
+{lapse_text}
+</p>
+</div>
+</div>
+</div>
+
+""", unsafe_allow_html=True)
 
     # Land Parcel Details Header
     parcel_info = data.get("parcel_info")
@@ -434,35 +444,43 @@ if data:
         st.caption(f"Project ID: `{data['project_id']}` • State/District: **{data['district']}, {data['state']}**")
         if parcel_info:
             st.markdown(f"""
-            **{'खसरा / भूखंड' if is_hi else 'Khasra / Plot'}:** `{parcel_info['khasra_number']}` &nbsp;|&nbsp; 
-            **{'ग्राम' if is_hi else 'Village'}:** {parcel_info['village']} &nbsp;|&nbsp;
-            **{'क्षेत्रफल' if is_hi else 'Area'}:** {parcel_info['area_acres']} {'एकड़' if is_hi else 'Acres'} ({parcel_info['land_type']})
-            """)
+
+**{'खसरा / भूखंड' if is_hi else 'Khasra / Plot'}:** `{parcel_info['khasra_number']}` &nbsp;|&nbsp;
+**{'ग्राम' if is_hi else 'Village'}:** {parcel_info['village']} &nbsp;|&nbsp;
+**{'क्षेत्रफल' if is_hi else 'Area'}:** {parcel_info['area_acres']} {'एकड़' if is_hi else 'Acres'} ({parcel_info['land_type']})
+
+""")
     
     with col_p2:
         st.markdown(f"**{'वर्तमान चरण' if is_hi else 'Current Stage'}:**")
         stage_name = data["current_stage_hi"] if is_hi else data["current_stage"]
         st.markdown(f"""
-        <div style="background: #E0F2FE; border-left: 4px solid #0284C7; padding: 8px 12px; border-radius: 0 8px 8px 0; font-weight: 700; color: #0369A1;">
-            {stage_name}
-        </div>
-        """, unsafe_allow_html=True)
+
+<div style="background: #E0F2FE; border-left: 4px solid #0284C7; padding: 8px 12px; border-radius: 0 8px 8px 0; font-weight: 700; color: #0369A1;">
+{stage_name}
+</div>
+
+""", unsafe_allow_html=True)
 
     with col_p3:
         st.markdown(f"**{'आपत्ति विंडो' if is_hi else 'Objection Window'}:**")
         if data.get("objection_window_open"):
             deadline = data.get("objection_deadline") or "Open"
             st.markdown(f"""
-            <span style="background: #DCFCE7; color: #15803D; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">
-                🟢 {'खुली है' if is_hi else 'OPEN'} (अंतिम तिथि: {deadline})
-            </span>
-            """, unsafe_allow_html=True)
+
+<span style="background: #DCFCE7; color: #15803D; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">
+🟢 {'खुली है' if is_hi else 'OPEN'} (अंतिम तिथि: {deadline})
+</span>
+
+""", unsafe_allow_html=True)
         else:
             st.markdown(f"""
-            <span style="background: #F1F5F9; color: #64748B; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
-                ⚪ {'समाप्त' if is_hi else 'CLOSED / CONCLUDED'}
-            </span>
-            """, unsafe_allow_html=True)
+
+<span style="background: #F1F5F9; color: #64748B; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;">
+⚪ {'समाप्त' if is_hi else 'CLOSED / CONCLUDED'}
+</span>
+
+""", unsafe_allow_html=True)
 
     # 1. RFCTLARR 6-Stage Timeline Progression
     st.write("")
@@ -489,17 +507,19 @@ if data:
                     card_cls = "timeline-upcoming"
 
                 st.markdown(f"""
-                <div class="timeline-card {card_cls}">
-                    <div>
-                        <div style="font-size: 0.72rem; font-weight: 700; color: #059669; margin-bottom: 2px;">{s_sec}</div>
-                        <div style="font-size: 0.88rem; font-weight: 700; color: #0F172A; line-height: 1.25; margin-bottom: 6px;">{s_name}</div>
-                        <div style="font-size: 0.75rem; color: #475569; line-height: 1.35;">{s_desc}</div>
-                    </div>
-                    <div style="margin-top: 10px; font-size: 0.75rem; font-weight: 700;">
-                        {badge}
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
+
+<div class="timeline-card {card_cls}">
+<div>
+<div style="font-size: 0.72rem; font-weight: 700; color: #059669; margin-bottom: 2px;">{s_sec}</div>
+<div style="font-size: 0.88rem; font-weight: 700; color: #0F172A; line-height: 1.25; margin-bottom: 6px;">{s_name}</div>
+<div style="font-size: 0.75rem; color: #475569; line-height: 1.35;">{s_desc}</div>
+</div>
+<div style="margin-top: 10px; font-size: 0.75rem; font-weight: 700;">
+{badge}
+</div>
+</div>
+
+""", unsafe_allow_html=True)
 
     st.write("")
 
@@ -512,45 +532,53 @@ if data:
         
         with c1:
             st.markdown(f"""
-            <div class="comp-card" style="border-top: 4px solid #3B82F6;">
-                <div class="comp-metric-label">{'आधार बाजार मूल्य' if is_hi else 'Base Market Value'}</div>
-                <div class="comp-metric-val">₹{comp['market_value_inr']:,.0f}</div>
-                <div style="font-size: 0.75rem; color: #64748B;">{'सर्किल रेट / पंजीकृत दर पर आधारित' if is_hi else 'Based on official Circle / Stamp rate'}</div>
-            </div>
-            """, unsafe_allow_html=True)
+
+<div class="comp-card" style="border-top: 4px solid #3B82F6;">
+<div class="comp-metric-label">{'आधार बाजार मूल्य' if is_hi else 'Base Market Value'}</div>
+<div class="comp-metric-val">₹{comp['market_value_inr']:,.0f}</div>
+<div style="font-size: 0.75rem; color: #64748B;">{'सर्किल रेट / पंजीकृत दर पर आधारित' if is_hi else 'Based on official Circle / Stamp rate'}</div>
+</div>
+
+""", unsafe_allow_html=True)
 
         with c2:
             st.markdown(f"""
-            <div class="comp-card" style="border-top: 4px solid #10B981;">
-                <div class="comp-metric-label">
-                    {'100% तोषणा (Solatium)' if is_hi else '100% Solatium (Mandatory)'}
-                    <span class="solatium-tag">Sec 30(1)</span>
-                </div>
-                <div class="comp-metric-val" style="color: #059669;">+ ₹{comp['solatium_inr']:,.0f}</div>
-                <div style="font-size: 0.75rem; color: #64748B;">{'100% अनिवार्य अतिरिक्त राशि' if is_hi else 'Mandatory 100% statutory addition'}</div>
-            </div>
-            """, unsafe_allow_html=True)
+
+<div class="comp-card" style="border-top: 4px solid #10B981;">
+<div class="comp-metric-label">
+{'100% तोषणा (Solatium)' if is_hi else '100% Solatium (Mandatory)'}
+<span class="solatium-tag">Sec 30(1)</span>
+</div>
+<div class="comp-metric-val" style="color: #059669;">+ ₹{comp['solatium_inr']:,.0f}</div>
+<div style="font-size: 0.75rem; color: #64748B;">{'100% अनिवार्य अतिरिक्त राशि' if is_hi else 'Mandatory 100% statutory addition'}</div>
+</div>
+
+""", unsafe_allow_html=True)
 
         with c3:
             st.markdown(f"""
-            <div class="comp-card" style="border-top: 4px solid #8B5CF6;">
-                <div class="comp-metric-label">{'गुणक एवं वृक्ष/संपत्ति मूल्य' if is_hi else 'Multiplier & Asset Value'}</div>
-                <div class="comp-metric-val">+ ₹{comp['additional_multiplier_inr']:,.0f}</div>
-                <div style="font-size: 0.75rem; color: #64748B;">{'ग्रामीण गुणक एवं पेड़ों का मूल्यांकन' if is_hi else 'Rural factor & standing assets'}</div>
-            </div>
-            """, unsafe_allow_html=True)
+
+<div class="comp-card" style="border-top: 4px solid #8B5CF6;">
+<div class="comp-metric-label">{'गुणक एवं वृक्ष/संपत्ति मूल्य' if is_hi else 'Multiplier & Asset Value'}</div>
+<div class="comp-metric-val">+ ₹{comp['additional_multiplier_inr']:,.0f}</div>
+<div style="font-size: 0.75rem; color: #64748B;">{'ग्रामीण गुणक एवं पेड़ों का मूल्यांकन' if is_hi else 'Rural factor & standing assets'}</div>
+</div>
+
+""", unsafe_allow_html=True)
 
         with c4:
             st.markdown(f"""
-            <div class="comp-card" style="border-top: 4px solid #059669; background: #F0FDF4;">
-                <div class="comp-metric-label" style="color: #166534;">{'कुल देय मुआवजा' if is_hi else 'Total Entitled Amount'}</div>
-                <div class="comp-metric-val" style="color: #15803D;">₹{comp['total_compensation_inr']:,.0f}</div>
-                <div style="font-size: 0.75rem; font-weight: bold; color: #166534;">
-                    {'स्थिति:' if is_hi else 'Status:'} {comp['payment_status']}
-                    {f" ({comp['disbursement_date']})" if comp['disbursement_date'] else ''}
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+
+<div class="comp-card" style="border-top: 4px solid #059669; background: #F0FDF4;">
+<div class="comp-metric-label" style="color: #166534;">{'कुल देय मुआवजा' if is_hi else 'Total Entitled Amount'}</div>
+<div class="comp-metric-val" style="color: #15803D;">₹{comp['total_compensation_inr']:,.0f}</div>
+<div style="font-size: 0.75rem; font-weight: bold; color: #166534;">
+{'स्थिति:' if is_hi else 'Status:'} {comp['payment_status']}
+{f" ({comp['disbursement_date']})" if comp['disbursement_date'] else ''}
+</div>
+</div>
+
+""", unsafe_allow_html=True)
 
         st.caption(f"ℹ️ {comp['calculation_formula_note']}")
     else:
@@ -561,10 +589,12 @@ if data:
     if rr:
         with st.expander(f"🏡 **{'पुनर्वास एवं पुनर्व्यवस्था (R&R) अधिकार' if is_hi else 'Rehabilitation & Resettlement (R&R) Entitlements'}** (Schedule II)", expanded=True):
             st.markdown(f"""
-            - **{'योजना स्थिति' if is_hi else 'Scheme Status'}:** `{rr['status']}`
-            - **{'स्वीकृत पैकेज' if is_hi else 'Approved Entitlements'}:** {rr['entitlements']}
-            - **{'कानूनी गारंटी' if is_hi else 'Statutory Guarantees'}:** {rr['mandatory_provisions']}
-            """)
+
+- **{'योजना स्थिति' if is_hi else 'Scheme Status'}:** `{rr['status']}`
+- **{'स्वीकृत पैकेज' if is_hi else 'Approved Entitlements'}:** {rr['entitlements']}
+- **{'कानूनी गारंटी' if is_hi else 'Statutory Guarantees'}:** {rr['mandatory_provisions']}
+
+""")
 
     st.write("")
 
@@ -575,47 +605,51 @@ if data:
     r_col1, r_col2 = st.columns(2)
     with r_col1:
         st.markdown(f"""
-        <div class="rights-card">
-            <strong style="color: #065F46; font-size: 0.95rem;">1. 100% Solatium (Section 30(1))</strong>
-            <p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
-                {'कलेक्टर द्वारा बाजार मूल्य के समतुल्य 100% अतिरिक्त तोषणा (Solatium) राशि जोड़ना कानूनी रूप से अनिवार्य है।' if is_hi else 'The Collector is legally mandated to award an additional solatium equal to 100% of the market value of the land.'}
-            </p>
-        </div>
-        <div class="rights-card">
-            <strong style="color: #065F46; font-size: 0.95rem;">2. Informed Consent Requirement (Section 2(2))</strong>
-            <p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
-                {'पीपीपी परियोजनाओं के लिए न्यूनतम 70% तथा निजी कंपनियों के लिए 80% प्रभावित भूस्वामियों की पूर्व लिखित सहमति अनिवार्य है।' if is_hi else 'Mandatory prior written consent of at least 70% of affected families for PPP projects and 80% for private projects is mandatory.'}
-            </p>
-        </div>
-        <div class="rights-card">
-            <strong style="color: #065F46; font-size: 0.95rem;">3. Section 10 Multi-Crop Agricultural Protection</strong>
-            <p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
-                {'सिंचित बहुफसली कृषि भूमि का अधिग्रहण केवल असाधारण परिस्थितियों में किया जा सकता है और समतुल्य बंजर भूमि को कृषि योग्य बनाना अनिवार्य है।' if is_hi else 'Irrigated multi-cropped agricultural land cannot normally be acquired, and equal fallow land must be developed if acquired.'}
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+
+<div class="rights-card">
+<strong style="color: #065F46; font-size: 0.95rem;">1. 100% Solatium (Section 30(1))</strong>
+<p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
+{'कलेक्टर द्वारा बाजार मूल्य के समतुल्य 100% अतिरिक्त तोषणा (Solatium) राशि जोड़ना कानूनी रूप से अनिवार्य है।' if is_hi else 'The Collector is legally mandated to award an additional solatium equal to 100% of the market value of the land.'}
+</p>
+</div>
+<div class="rights-card">
+<strong style="color: #065F46; font-size: 0.95rem;">2. Informed Consent Requirement (Section 2(2))</strong>
+<p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
+{'पीपीपी परियोजनाओं के लिए न्यूनतम 70% तथा निजी कंपनियों के लिए 80% प्रभावित भूस्वामियों की पूर्व लिखित सहमति अनिवार्य है।' if is_hi else 'Mandatory prior written consent of at least 70% of affected families for PPP projects and 80% for private projects is mandatory.'}
+</p>
+</div>
+<div class="rights-card">
+<strong style="color: #065F46; font-size: 0.95rem;">3. Section 10 Multi-Crop Agricultural Protection</strong>
+<p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
+{'सिंचित बहुफसली कृषि भूमि का अधिग्रहण केवल असाधारण परिस्थितियों में किया जा सकता है और समतुल्य बंजर भूमि को कृषि योग्य बनाना अनिवार्य है।' if is_hi else 'Irrigated multi-cropped agricultural land cannot normally be acquired, and equal fallow land must be developed if acquired.'}
+</p>
+</div>
+
+""", unsafe_allow_html=True)
 
     with r_col2:
         st.markdown(f"""
-        <div class="rights-card">
-            <strong style="color: #065F46; font-size: 0.95rem;">4. Section 24 Lapsing of Old Proceedings</strong>
-            <p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
-                {'यदि अवार्ड घोषित हुए 5 वर्ष या अधिक हो चुके हैं और भौतिक कब्जा नहीं लिया गया अथवा मुआवजा नहीं दिया गया, तो अधिग्रहण प्रक्रिया निरस्त मानी जाती है।' if is_hi else 'Where an award was made 5+ years ago and physical possession was not taken or compensation not paid, the acquisition legally lapses.'}
-            </p>
-        </div>
-        <div class="rights-card">
-            <strong style="color: #065F46; font-size: 0.95rem;">5. Section 101 Return of Unused Land</strong>
-            <p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
-                {'यदि अधिग्रहित भूमि 5 वर्ष तक उपयोग में नहीं लाई जाती, तो इसे मूल भूस्वामियों अथवा राज्य भूमि बैंक को वापस करना अनिवार्य है।' if is_hi else 'If land acquired remains unutilized for 5 years from possession date, it must be returned to the original owners or State Land Bank.'}
-            </p>
-        </div>
-        <div class="rights-card">
-            <strong style="color: #065F46; font-size: 0.95rem;">6. Section 38 Prior Payment Before Possession</strong>
-            <p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
-                {'जब तक संपूर्ण मुआवजा एवं पुनर्वास राशि भूस्वामी के बैंक खाते में जमा नहीं हो जाती, तब तक भौतिक कब्जा नहीं लिया जा सकता।' if is_hi else 'The Collector cannot take physical possession of land until full compensation and monetary R&R entitlements have been disbursed.'}
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+
+<div class="rights-card">
+<strong style="color: #065F46; font-size: 0.95rem;">4. Section 24 Lapsing of Old Proceedings</strong>
+<p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
+{'यदि अवार्ड घोषित हुए 5 वर्ष या अधिक हो चुके हैं और भौतिक कब्जा नहीं लिया गया अथवा मुआवजा नहीं दिया गया, तो अधिग्रहण प्रक्रिया निरस्त मानी जाती है।' if is_hi else 'Where an award was made 5+ years ago and physical possession was not taken or compensation not paid, the acquisition legally lapses.'}
+</p>
+</div>
+<div class="rights-card">
+<strong style="color: #065F46; font-size: 0.95rem;">5. Section 101 Return of Unused Land</strong>
+<p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
+{'यदि अधिग्रहित भूमि 5 वर्ष तक उपयोग में नहीं लाई जाती, तो इसे मूल भूस्वामियों अथवा राज्य भूमि बैंक को वापस करना अनिवार्य है।' if is_hi else 'If land acquired remains unutilized for 5 years from possession date, it must be returned to the original owners or State Land Bank.'}
+</p>
+</div>
+<div class="rights-card">
+<strong style="color: #065F46; font-size: 0.95rem;">6. Section 38 Prior Payment Before Possession</strong>
+<p style="margin: 4px 0 0 0; font-size: 0.84rem; color: #334155;">
+{'जब तक संपूर्ण मुआवजा एवं पुनर्वास राशि भूस्वामी के बैंक खाते में जमा नहीं हो जाती, तब तक भौतिक कब्जा नहीं लिया जा सकता।' if is_hi else 'The Collector cannot take physical possession of land until full compensation and monetary R&R entitlements have been disbursed.'}
+</p>
+</div>
+
+""", unsafe_allow_html=True)
 
     st.write("")
 
@@ -699,14 +733,16 @@ if data:
                     res = client.submit_citizen_objection(payload)
                     st.success(f"✅ **{res['message']}**")
                     st.markdown(f"""
-                    <div style="background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 8px; padding: 14px; margin-top: 10px;">
-                        <strong>📌 {'आधिकारिक ट्रैकिंग संदर्भ' if is_hi else 'Official Tracking Reference'}:</strong> 
-                        <span style="font-size: 1.2rem; color: #15803D; font-weight: bold; margin-left: 8px;">{res['objection_id']}</span><br>
-                        <strong>⏱️ {'वैधानिक सुनवाई समयसीमा' if is_hi else 'Mandated Resolution Window'}:</strong> {res['expected_resolution_days']} {'दिन (RFCTLARR धारा 15)' if is_hi else 'Days (RFCTLARR Section 15)'}<br>
-                        <strong>📱 SMS Status:</strong> {res['sms_status']} &nbsp;|&nbsp; 
-                        <strong>✉️ Email Status:</strong> {res['email_status']}
-                    </div>
-                    """, unsafe_allow_html=True)
+
+<div style="background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 8px; padding: 14px; margin-top: 10px;">
+<strong>📌 {'आधिकारिक ट्रैकिंग संदर्भ' if is_hi else 'Official Tracking Reference'}:</strong>
+<span style="font-size: 1.2rem; color: #15803D; font-weight: bold; margin-left: 8px;">{res['objection_id']}</span><br>
+<strong>⏱️ {'वैधानिक सुनवाई समयसीमा' if is_hi else 'Mandated Resolution Window'}:</strong> {res['expected_resolution_days']} {'दिन (RFCTLARR धारा 15)' if is_hi else 'Days (RFCTLARR Section 15)'}<br>
+<strong>📱 SMS Status:</strong> {res['sms_status']} &nbsp;|&nbsp;
+<strong>✉️ Email Status:</strong> {res['email_status']}
+</div>
+
+""", unsafe_allow_html=True)
                 except Exception as ex:
                     st.error(f"⚠️ Failed to lodge objection: {ex}")
 

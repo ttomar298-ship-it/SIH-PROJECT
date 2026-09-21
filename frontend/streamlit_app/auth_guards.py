@@ -49,15 +49,9 @@ def require_citizen_login() -> None:
     is_citizen = st.session_state.get("citizen_authenticated", False)
     if not is_citizen:
         st.warning("🌾 Please log in to track your project.")
-        st.markdown("""
-<div style="text-align:center; margin-top:24px;">
-    <a href="/Citizen_Login" target="_self" style="
-        background:#065F46; color:#FFFFFF; padding:12px 28px;
-        border-radius:8px; font-weight:700; font-size:0.95rem;
-        text-decoration:none; display:inline-block;
-        box-shadow: 0 4px 10px rgba(6,95,70,0.25);
-    ">🌾 Go to Citizen Login</a>
-</div>
-""", unsafe_allow_html=True)
+        _, col_btn, _ = st.columns([1, 2, 1])
+        with col_btn:
+            st.page_link("pages/9_🔑_Citizen_Login.py", label="🌾 Go to Citizen Login", icon="🔑", use_container_width=True)
         st.stop()
+
 

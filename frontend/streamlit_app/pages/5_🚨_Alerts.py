@@ -107,18 +107,20 @@ else:
         with st.container():
             st.markdown(
                 f"""
-                <div style="border-left: 5px solid {border_color}; padding: 12px 16px; background-color: #F9FAFB; border-radius: 4px; margin-bottom: 12px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 1.15rem; font-weight: bold; color: #111827;">{alert['project_name']}</span>
-                        <span style="background-color: {badge_bg}; color: {badge_fg}; font-weight: bold; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">
-                            {alert['severity']} ALERT (Risk: {alert['risk_score']}/100)
-                        </span>
-                    </div>
-                    <p style="margin: 4px 0; color: #4B5563; font-size: 0.9rem;">
-                        <strong>ID:</strong> {alert['project_id']} | 📍 <strong>Location:</strong> {alert['district']}, {alert['state']} | ⏱️ <strong>Evaluated:</strong> {alert['evaluated_at']}
-                    </p>
-                </div>
-                """,
+
+<div style="border-left: 5px solid {border_color}; padding: 12px 16px; background-color: #F9FAFB; border-radius: 4px; margin-bottom: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-size: 1.15rem; font-weight: bold; color: #111827;">{alert['project_name']}</span>
+<span style="background-color: {badge_bg}; color: {badge_fg}; font-weight: bold; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">
+{alert['severity']} ALERT (Risk: {alert['risk_score']}/100)
+</span>
+</div>
+<p style="margin: 4px 0; color: #4B5563; font-size: 0.9rem;">
+<strong>ID:</strong> {alert['project_id']} | 📍 <strong>Location:</strong> {alert['district']}, {alert['state']} | ⏱️ <strong>Evaluated:</strong> {alert['evaluated_at']}
+</p>
+</div>
+
+""",
                 unsafe_allow_html=True
             )
 

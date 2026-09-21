@@ -260,11 +260,13 @@ def render_sidebar_brand():
 
         st.markdown(
             """
-            <div style="text-align: center; margin-top: -8px; margin-bottom: 14px;">
-                <span style="font-size: 0.72rem; letter-spacing: 2px; color: #15803D; font-weight: 800;">LAND • DATA • BETTER TOMORROW</span><br>
-                <span style="font-size: 0.68rem; color: #64748B; font-weight: 500;">PM GatiShakti | SIH26017</span>
-            </div>
-            """,
+
+<div style="text-align: center; margin-top: -8px; margin-bottom: 14px;">
+<span style="font-size: 0.72rem; letter-spacing: 2px; color: #15803D; font-weight: 800;">LAND • DATA • BETTER TOMORROW</span><br>
+<span style="font-size: 0.68rem; color: #64748B; font-weight: 500;">PM GatiShakti | SIH26017</span>
+</div>
+
+""",
             unsafe_allow_html=True
         )
 
@@ -272,22 +274,24 @@ def render_sidebar_brand():
         if user:
             st.markdown(
                 f"""
-                <div style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; border: 1px solid #047857; color: white;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="font-size: 1.8rem; background: rgba(255,255,255,0.1); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
-                            {user['avatar']}
-                        </div>
-                        <div style="overflow: hidden;">
-                            <div style="font-weight: 700; font-size: 0.88rem; color: #F8FAFC; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{user['name']}</div>
-                            <div style="font-size: 0.72rem; color: #4ADE80; font-weight: 600;">{user['role']}</div>
-                            <div style="font-size: 0.68rem; color: #94A3B8;">{user['org']}</div>
-                        </div>
-                    </div>
-                    <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
-                        <span style="background: #166534; color: #BBF7D0; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 10px;">🟢 {user['badge']}</span>
-                    </div>
-                </div>
-                """,
+
+<div style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; border: 1px solid #047857; color: white;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<div style="font-size: 1.8rem; background: rgba(255,255,255,0.1); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+{user['avatar']}
+</div>
+<div style="overflow: hidden;">
+<div style="font-weight: 700; font-size: 0.88rem; color: #F8FAFC; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{user['name']}</div>
+<div style="font-size: 0.72rem; color: #4ADE80; font-weight: 600;">{user['role']}</div>
+<div style="font-size: 0.68rem; color: #94A3B8;">{user['org']}</div>
+</div>
+</div>
+<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+<span style="background: #166534; color: #BBF7D0; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 10px;">🟢 {user['badge']}</span>
+</div>
+</div>
+
+""",
                 unsafe_allow_html=True
             )
             if st.button("🚪 Log Out", key="sb_logout_btn", help="Sign out of Bhoomi AI session"):
@@ -295,11 +299,13 @@ def render_sidebar_brand():
         else:
             st.markdown(
                 """
-                <div style="background: #FEF3C7; border: 1px solid #FCD34D; border-radius: 10px; padding: 10px; margin-bottom: 12px; text-align: center;">
-                    <span style="font-size: 0.75rem; color: #92400E; font-weight: 600;">⚠️ Guest Viewing Session</span><br>
-                    <span style="font-size: 0.70rem; color: #B45309;">Log in to access official approvals & alerts</span>
-                </div>
-                """,
+
+<div style="background: #FEF3C7; border: 1px solid #FCD34D; border-radius: 10px; padding: 10px; margin-bottom: 12px; text-align: center;">
+<span style="font-size: 0.75rem; color: #92400E; font-weight: 600;">⚠️ Guest Viewing Session</span><br>
+<span style="font-size: 0.70rem; color: #B45309;">Log in to access official approvals & alerts</span>
+</div>
+
+""",
                 unsafe_allow_html=True
             )
             c1, c2 = st.columns(2)

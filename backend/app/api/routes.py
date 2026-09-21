@@ -352,3 +352,55 @@ def get_model_metrics():
     import json
     with open(metrics_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+# A7: AI-Based Cost Estimation for a Single Project
+@router.get("/predict-cost/{project_id}")
+def predict_project_cost(project_id: str, db: Session = Depends(get_db)):
+    proj = get_project_by_id(db, project_id)
+    if not proj:
+        raise HTTPException(status_code=404, detail=f"Project with ID '{project_id}' not found.")
+    
+    from backend.app.ml.cost_estimator import get_cost_estimator
+    estimator = get_cost_estimator()
+    return estimator.estimate_project_cost(proj.to_dict())
+
+# A8: Portfolio Capital Allocation & Expenditure Forecasting
+@router.get("/capital-allocation")
+def get_capital_allocation(
+    state: Optional[str] = Query(None, description="Filter by state"),
+    sector: Optional[str] = Query(None, description="Filter by sector/ministry"),
+    stage: Optional[str] = Query(None, description="Filter by acquisition stage"),
+    db: Session = Depends(get_db)
+):
+    projects = get_projects(db, state=state, stage=stage)
+    proj_dicts = [p.to_dict() for p in projects]
+    if sector and sector != "All":
+        proj_dicts = [p for p in proj_dicts if p.get("sector") == sector]
+        
+    from backend.app.ml.cost_estimator import get_cost_estimator
+    estimator = get_cost_estimator()
+    cost_data = estimator.batch_estimate_costs(proj_dicts)
+    
+    total_sanctioned = sum(p["sanctioned_budget_crores"] for p in cost_data)
+    total_estimated = sum(p["estimated_total_cost_crores"] for p in cost_data)
+    total_overrun = round(total_estimated - total_sanctioned, 2)
+    avg_overrun_pct = round((total_overrun / total_sanctioned * 100.0), 2) if total_sanctioned > 0 else 0.0
+    
+    high_overrun_count = sum(1 for p in cost_data if p["overrun_tier"] == "High Overrun")
+    mod_overrun_count = sum(1 for p in cost_data if p["overrun_tier"] == "Moderate Overrun")
+    on_budget_count = sum(1 for p in cost_data if p["overrun_tier"] == "On Budget")
+    
+    return {
+        "summary": {
+            "total_projects": len(cost_data),
+            "total_sanctioned_budget_crores": round(total_sanctioned, 2),
+            "total_estimated_expenditure_crores": round(total_estimated, 2),
+            "net_overrun_crores": total_overrun,
+            "portfolio_overrun_pct": avg_overrun_pct,
+            "high_overrun_count": high_overrun_count,
+            "moderate_overrun_count": mod_overrun_count,
+            "on_budget_count": on_budget_count
+        },
+        "projects": cost_data
+    }
+

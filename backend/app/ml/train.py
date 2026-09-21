@@ -93,6 +93,13 @@ def train_and_evaluate():
         "test_samples": len(X_test)
     }, meta_path)
 
+    # 3. Train Cost Overrun Regressor
+    try:
+        from backend.app.ml.train_cost_model import train_cost_model
+    except ImportError:
+        from train_cost_model import train_cost_model
+    cost_reg, cost_metrics = train_cost_model()
+
     report = {
         "dataset": {
             "total_samples": len(df),
@@ -114,6 +121,12 @@ def train_and_evaluate():
             "rmse": round(float(rmse), 2),
             "mae": round(float(mae), 2),
             "r2_score": round(float(r2), 4)
+        },
+        "cost_regressor": {
+            "model_type": "RandomForestRegressor (Cost Overrun %)",
+            "rmse_pct": round(float(cost_metrics["rmse"]), 2),
+            "mae_pct": round(float(cost_metrics["mae"]), 2),
+            "r2_score": round(float(cost_metrics["r2"]), 4)
         },
         "features": FEATURE_COLUMNS
     }

@@ -54,8 +54,10 @@ require_officer_login()
 
 st.title("📜 DILRMP: Digital Land Records & Delay Risk Analysis")
 st.markdown("""
-Analysis of the **Digital India Land Records Modernization Programme (DILRMP)** across 34 States and Union Territories. 
+
+Analysis of the **Digital India Land Records Modernization Programme (DILRMP)** across 34 States and Union Territories.
 State-level land record computerization directly governs land title search speed, legal dispute prevalence, and land acquisition project lead times.
+
 """)
 
 if not client.check_health():

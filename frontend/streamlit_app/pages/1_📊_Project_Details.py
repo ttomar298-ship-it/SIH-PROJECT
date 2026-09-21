@@ -54,54 +54,56 @@ require_officer_login()
 
 # Custom CSS
 st.markdown("""
+
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    
-    .detail-hero {
-        background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
-        border-radius: 14px;
-        padding: 24px;
-        color: white;
-        margin-bottom: 20px;
-        border: 1px solid #047857;
-        box-shadow: 0 8px 20px -4px rgba(6, 78, 59, 0.2);
-    }
-    .metric-panel {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 12px;
-        padding: 16px 20px;
-    }
-    .stage-done {
-        background: #D1FAE5;
-        color: #065F46;
-        border-left: 4px solid #10B981;
-        padding: 10px 14px;
-        border-radius: 6px;
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-    }
-    .stage-active {
-        background: #FEF3C7;
-        color: #92400E;
-        border-left: 4px solid #F59E0B;
-        padding: 10px 14px;
-        border-radius: 6px;
-        margin-bottom: 8px;
-        font-weight: 700;
-        font-size: 0.95rem;
-    }
-    .stage-pending {
-        background: #F1F5F9;
-        color: #64748B;
-        border-left: 4px solid #CBD5E1;
-        padding: 10px 14px;
-        border-radius: 6px;
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+* { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+.detail-hero {
+background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
+border-radius: 14px;
+padding: 24px;
+color: white;
+margin-bottom: 20px;
+border: 1px solid #047857;
+box-shadow: 0 8px 20px -4px rgba(6, 78, 59, 0.2);
+}
+.metric-panel {
+background: #F8FAFC;
+border: 1px solid #E2E8F0;
+border-radius: 12px;
+padding: 16px 20px;
+}
+.stage-done {
+background: #D1FAE5;
+color: #065F46;
+border-left: 4px solid #10B981;
+padding: 10px 14px;
+border-radius: 6px;
+margin-bottom: 8px;
+font-size: 0.9rem;
+}
+.stage-active {
+background: #FEF3C7;
+color: #92400E;
+border-left: 4px solid #F59E0B;
+padding: 10px 14px;
+border-radius: 6px;
+margin-bottom: 8px;
+font-weight: 700;
+font-size: 0.95rem;
+}
+.stage-pending {
+background: #F1F5F9;
+color: #64748B;
+border-left: 4px solid #CBD5E1;
+padding: 10px 14px;
+border-radius: 6px;
+margin-bottom: 8px;
+font-size: 0.9rem;
+}
 </style>
+
 """, unsafe_allow_html=True)
 
 st.title("📊 Project Deep-Dive & Timeline Inspection")
@@ -145,25 +147,27 @@ if selected_id:
     # Hero card
     risk_col = risk.get('color_code', '#3B82F6')
     st.markdown(f"""
-    <div class="detail-hero">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <span style="background: #3B82F6; color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
-                    {p.get('sector', 'Infrastructure')}
-                </span>
-                <h2 style="margin: 8px 0 4px 0; color: white; font-size: 1.7rem;">{p['project_name']}</h2>
-                <p style="margin: 0; color: #94A3B8; font-size: 0.95rem;">
-                    📍 {p['district']}, {p['state']} • Project ID: <code>{p['project_id']}</code> • State Land Records Digitalization: <b>{p.get('clr_completed_pct', 97.5)}%</b>
-                </p>
-            </div>
-            <div style="text-align: right; background: rgba(255,255,255,0.08); padding: 14px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
-                <div style="font-size: 0.8rem; color: #94A3B8; text-transform: uppercase;">Calibrated Risk</div>
-                <div style="font-size: 2.2rem; font-weight: 800; color: {risk_col};">{risk['risk_score']} <span style="font-size: 1rem; color: #94A3B8;">/100</span></div>
-                <div style="font-size: 0.85rem; font-weight: bold; color: {risk_col};">{risk['risk_category'].upper()} RISK</div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="detail-hero">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div>
+<span style="background: #3B82F6; color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+{p.get('sector', 'Infrastructure')}
+</span>
+<h2 style="margin: 8px 0 4px 0; color: white; font-size: 1.7rem;">{p['project_name']}</h2>
+<p style="margin: 0; color: #94A3B8; font-size: 0.95rem;">
+📍 {p['district']}, {p['state']} • Project ID: <code>{p['project_id']}</code> • State Land Records Digitalization: <b>{p.get('clr_completed_pct', 97.5)}%</b>
+</p>
+</div>
+<div style="text-align: right; background: rgba(255,255,255,0.08); padding: 14px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);">
+<div style="font-size: 0.8rem; color: #94A3B8; text-transform: uppercase;">Calibrated Risk</div>
+<div style="font-size: 2.2rem; font-weight: 800; color: {risk_col};">{risk['risk_score']} <span style="font-size: 1rem; color: #94A3B8;">/100</span></div>
+<div style="font-size: 0.85rem; font-weight: bold; color: {risk_col};">{risk['risk_category'].upper()} RISK</div>
+</div>
+</div>
+</div>
+
+""", unsafe_allow_html=True)
 
     # Summary Row
     k1, k2, k3, k4 = st.columns(4)
@@ -201,25 +205,31 @@ if selected_id:
         for i, (stg_name, stg_desc) in enumerate(STAGES):
             if i < current_idx:
                 st.markdown(f"""
-                <div class="stage-done">
-                    ✅ <b>Stage {i+1}: {stg_name}</b> (Completed)<br>
-                    <span style="font-size: 0.8rem; color: #047857;">{stg_desc}</span>
-                </div>
-                """, unsafe_allow_html=True)
+
+<div class="stage-done">
+✅ <b>Stage {i+1}: {stg_name}</b> (Completed)<br>
+<span style="font-size: 0.8rem; color: #047857;">{stg_desc}</span>
+</div>
+
+""", unsafe_allow_html=True)
             elif i == current_idx:
                 st.markdown(f"""
-                <div class="stage-active">
-                    🔄 <b>Stage {i+1}: {stg_name}</b> (Active Stage)<br>
-                    <span style="font-size: 0.8rem; color: #78350F;">{stg_desc}</span>
-                </div>
-                """, unsafe_allow_html=True)
+
+<div class="stage-active">
+🔄 <b>Stage {i+1}: {stg_name}</b> (Active Stage)<br>
+<span style="font-size: 0.8rem; color: #78350F;">{stg_desc}</span>
+</div>
+
+""", unsafe_allow_html=True)
             else:
                 st.markdown(f"""
-                <div class="stage-pending">
-                    ⚪ <b>Stage {i+1}: {stg_name}</b> (Upcoming)<br>
-                    <span style="font-size: 0.8rem; color: #64748B;">{stg_desc}</span>
-                </div>
-                """, unsafe_allow_html=True)
+
+<div class="stage-pending">
+⚪ <b>Stage {i+1}: {stg_name}</b> (Upcoming)<br>
+<span style="font-size: 0.8rem; color: #64748B;">{stg_desc}</span>
+</div>
+
+""", unsafe_allow_html=True)
 
         st.markdown("---")
         st.subheader("💡 Recommended Action Plan for Competent Authority (CALA)")
@@ -262,10 +272,12 @@ if selected_id:
         # Key Project Dates
         st.markdown("---")
         st.markdown(f"""
-        - 📅 **Start Date:** `{p['start_date']}`
-        - 🎯 **Target Completion:** `{p['target_completion_date']}`
-        - ⏱️ **Anticipated / Actual:** `{p.get('actual_or_projected_date', 'N/A')}`
-        - ⏳ **Total Scheduled Duration:** `{p['planned_duration_days']} days`
-        """)
+
+- 📅 **Start Date:** `{p['start_date']}`
+- 🎯 **Target Completion:** `{p['target_completion_date']}`
+- ⏱️ **Anticipated / Actual:** `{p.get('actual_or_projected_date', 'N/A')}`
+- ⏳ **Total Scheduled Duration:** `{p['planned_duration_days']} days`
+
+""")
 
 render_gov_footer()

@@ -54,32 +54,34 @@ require_officer_login()
 
 
 st.markdown("""
+
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    
-    .verdict-box {
-        background: #F8FAFC;
-        border-radius: 12px;
-        padding: 20px 24px;
-        border-left: 6px solid #059669;
-        margin-bottom: 24px;
-    }
-    .factor-card {
-        background: white;
-        border-radius: 10px;
-        padding: 14px 18px;
-        margin-bottom: 10px;
-        border: 1px solid #E2E8F0;
-    }
-    .metrics-summary-card {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        padding: 14px 16px;
-        margin-bottom: 14px;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+* { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+.verdict-box {
+background: #F8FAFC;
+border-radius: 12px;
+padding: 20px 24px;
+border-left: 6px solid #059669;
+margin-bottom: 24px;
+}
+.factor-card {
+background: white;
+border-radius: 10px;
+padding: 14px 18px;
+margin-bottom: 10px;
+border: 1px solid #E2E8F0;
+}
+.metrics-summary-card {
+background: #F8FAFC;
+border: 1px solid #E2E8F0;
+border-radius: 10px;
+padding: 14px 16px;
+margin-bottom: 14px;
+}
 </style>
+
 """, unsafe_allow_html=True)
 
 st.title("🧠 Explainable AI: Root-Cause Factor Analysis")
@@ -114,18 +116,22 @@ with st.expander("📊 AI Model Performance & Validation Methodology", expanded=
     })
     
     st.markdown("""
-    This section documents the predictive rigor and holdout test set validation for Bhoomi AI's dual-stage machine learning engine.
-    """)
+
+This section documents the predictive rigor and holdout test set validation for Bhoomi AI's dual-stage machine learning engine.
+
+""")
 
     st.markdown(f"""
-    <div style="background: #F1F5F9; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; border-left: 4px solid #3B82F6; font-size: 0.9rem;">
-        <b>Validation Methodology:</b> {dataset_info.get('split_method')} &bull;
-        <b>Total Benchmark Sample:</b> {dataset_info.get('total_samples')} projects &bull;
-        <b>Training Set:</b> {dataset_info.get('train_samples')} (80%) &bull;
-        <b>Holdout Test Set:</b> {dataset_info.get('test_samples')} (20%) &bull;
-        <b>Engineered Features:</b> {dataset_info.get('features_count')}
-    </div>
-    """, unsafe_allow_html=True)
+
+<div style="background: #F1F5F9; border-radius: 8px; padding: 10px 16px; margin-bottom: 16px; border-left: 4px solid #3B82F6; font-size: 0.9rem;">
+<b>Validation Methodology:</b> {dataset_info.get('split_method')} &bull;
+<b>Total Benchmark Sample:</b> {dataset_info.get('total_samples')} projects &bull;
+<b>Training Set:</b> {dataset_info.get('train_samples')} (80%) &bull;
+<b>Holdout Test Set:</b> {dataset_info.get('test_samples')} (20%) &bull;
+<b>Engineered Features:</b> {dataset_info.get('features_count')}
+</div>
+
+""", unsafe_allow_html=True)
     
     col_clf, col_reg = st.columns(2)
     
@@ -207,27 +213,29 @@ if chosen_id:
         safeguards_html = "<li>None identified — project is constrained across parameters.</li>"
 
     st.markdown(f"""
-    <div class="verdict-box">
-        <h3 style="margin: 0 0 10px 0; color: #0F172A; font-size: 1.25rem;">🔍 AI Executive Diagnostic Summary</h3>
-        <p style="color: #475569; font-size: 0.95rem; margin-bottom: 12px;">
-            The machine learning model evaluated this project against 250+ national infrastructure benchmarks.
-        </p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div>
-                <h4 style="color: #DC2626; margin: 0 0 6px 0; font-size: 1rem;">Primary Drivers Increasing Delay:</h4>
-                <ul style="padding-left: 20px; color: #334155; margin: 0; font-size: 0.9rem;">
-                    {reasons_html}
-                </ul>
-            </div>
-            <div>
-                <h4 style="color: #059669; margin: 0 0 6px 0; font-size: 1rem;">Mitigating Factors Pulling Towards Schedule:</h4>
-                <ul style="padding-left: 20px; color: #334155; margin: 0; font-size: 0.9rem;">
-                    {safeguards_html}
-                </ul>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="verdict-box">
+<h3 style="margin: 0 0 10px 0; color: #0F172A; font-size: 1.25rem;">🔍 AI Executive Diagnostic Summary</h3>
+<p style="color: #475569; font-size: 0.95rem; margin-bottom: 12px;">
+The machine learning model evaluated this project against 250+ national infrastructure benchmarks.
+</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+<div>
+<h4 style="color: #DC2626; margin: 0 0 6px 0; font-size: 1rem;">Primary Drivers Increasing Delay:</h4>
+<ul style="padding-left: 20px; color: #334155; margin: 0; font-size: 0.9rem;">
+{reasons_html}
+</ul>
+</div>
+<div>
+<h4 style="color: #059669; margin: 0 0 6px 0; font-size: 1rem;">Mitigating Factors Pulling Towards Schedule:</h4>
+<ul style="padding-left: 20px; color: #334155; margin: 0; font-size: 0.9rem;">
+{safeguards_html}
+</ul>
+</div>
+</div>
+</div>
+
+""", unsafe_allow_html=True)
 
     # Interactive Plotly Waterfall / Horizontal Bar Chart
     st.subheader("📊 TreeSHAP Feature Attribution Chart")

@@ -53,7 +53,9 @@ require_officer_login()
 
 st.title("➕ Project Risk Simulator & Ingestion Sandbox")
 st.markdown("""
+
 Run **'What-If' scenarios** to observe how accelerating compensation disbursements, resolving court disputes, or improving land record digitalization reduces delay forecasts.
+
 """)
 
 if not client.check_health():

@@ -71,7 +71,7 @@ if st.session_state.get("citizen_authenticated", False):
                     '<meta http-equiv="refresh" content="0; url=/Citizen_Tracker">',
                     unsafe_allow_html=True,
                 )
-        if st.button("🚪 Citizen Logout", use_container_width=True):
+        if st.button("Sign Out", use_container_width=True):
             # Clear ONLY citizen keys — officer keys ('authenticated', 'user') untouched
             for k in ["citizen_authenticated", "citizen_identifier",
                       "citizen_otp", "citizen_otp_ts", "citizen_pending_id"]:
@@ -187,4 +187,3 @@ with col_form:
     )
 
 render_gov_footer()
-

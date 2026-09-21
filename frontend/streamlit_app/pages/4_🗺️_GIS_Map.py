@@ -64,125 +64,129 @@ require_officer_login()
 
 # Custom Styling
 st.markdown("""
+
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    
-    .gis-header {
-        background: linear-gradient(135deg, #064E3B 0%, #065F46 45%, #0F766E 100%);
-        border-radius: 16px;
-        padding: 24px 30px;
-        color: white;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 20px -5px rgba(6, 78, 59, 0.3);
-    }
-    .gis-title {
-        font-size: 2rem;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-        margin: 0;
-        background: linear-gradient(90deg, #FFFFFF, #6EE7B7);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .gis-subtitle {
-        font-size: 0.95rem;
-        color: #D1FAE5;
-        margin-top: 6px;
-        max-width: 850px;
-        line-height: 1.5;
-    }
-    
-    /* 3-Color Visual Guide */
-    .legend-banner {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 12px;
-        padding: 12px 18px;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-    .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.82rem;
-        font-weight: 600;
-    }
-    .legend-dot-red {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: #EF4444;
-        box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
-    }
-    .legend-dot-orange {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: #F59E0B;
-        box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
-    }
-    .legend-dot-green {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: #10B981;
-        box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-    }
-    
-    .inspector-card {
-        background: white;
-        border-radius: 14px;
-        border: 1.5px solid #E2E8F0;
-        padding: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    
-    .kpi-chip {
-        background: white;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        padding: 10px 14px;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-    .kpi-chip-title {
-        font-size: 0.72rem;
-        font-weight: 700;
-        color: #64748B;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .kpi-chip-val {
-        font-size: 1.4rem;
-        font-weight: 800;
-        margin-top: 2px;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+* { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+.gis-header {
+background: linear-gradient(135deg, #064E3B 0%, #065F46 45%, #0F766E 100%);
+border-radius: 16px;
+padding: 24px 30px;
+color: white;
+margin-bottom: 20px;
+box-shadow: 0 10px 20px -5px rgba(6, 78, 59, 0.3);
+}
+.gis-title {
+font-size: 2rem;
+font-weight: 800;
+letter-spacing: -0.5px;
+margin: 0;
+background: linear-gradient(90deg, #FFFFFF, #6EE7B7);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.gis-subtitle {
+font-size: 0.95rem;
+color: #D1FAE5;
+margin-top: 6px;
+max-width: 850px;
+line-height: 1.5;
+}
+
+/* 3-Color Visual Guide */
+.legend-banner {
+background: #F8FAFC;
+border: 1px solid #E2E8F0;
+border-radius: 12px;
+padding: 12px 18px;
+margin-bottom: 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 12px;
+}
+.legend-item {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 0.82rem;
+font-weight: 600;
+}
+.legend-dot-red {
+width: 14px;
+height: 14px;
+border-radius: 50%;
+background: #EF4444;
+box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+.legend-dot-orange {
+width: 14px;
+height: 14px;
+border-radius: 50%;
+background: #F59E0B;
+box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+.legend-dot-green {
+width: 14px;
+height: 14px;
+border-radius: 50%;
+background: #10B981;
+box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.inspector-card {
+background: white;
+border-radius: 14px;
+border: 1.5px solid #E2E8F0;
+padding: 20px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.kpi-chip {
+background: white;
+border: 1px solid #E2E8F0;
+border-radius: 10px;
+padding: 10px 14px;
+text-align: center;
+box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.kpi-chip-title {
+font-size: 0.72rem;
+font-weight: 700;
+color: #64748B;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.kpi-chip-val {
+font-size: 1.4rem;
+font-weight: 800;
+margin-top: 2px;
+}
 </style>
+
 """, unsafe_allow_html=True)
 
 # Top Hero Banner
 st.markdown("""
+
 <div class="gis-header">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
-        <div>
-            <h1 class="gis-title">🗺️ Geospatial Risk Radar & Land Acquisition GIS</h1>
-            <div class="gis-subtitle">
-                Interactive spatial intelligence tracking land bottlenecks, court stay orders, and compensation disbursements across 250+ national infrastructure corridors.
-            </div>
-        </div>
-        <div>
-            <span style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; backdrop-filter: blur(4px);">
-                🇮🇳 PM GatiShakti NMP
-            </span>
-        </div>
-    </div>
+<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+<div>
+<h1 class="gis-title">🗺️ Geospatial Risk Radar & Land Acquisition GIS</h1>
+<div class="gis-subtitle">
+Interactive spatial intelligence tracking land bottlenecks, court stay orders, and compensation disbursements across 250+ national infrastructure corridors.
 </div>
+</div>
+<div>
+<span style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; backdrop-filter: blur(4px);">
+🇮🇳 PM GatiShakti NMP
+</span>
+</div>
+</div>
+</div>
+
 """, unsafe_allow_html=True)
 
 import logging
@@ -209,23 +213,25 @@ if not markers_data:
 
 # 3-Color Plain-English Visual Guide
 st.markdown("""
+
 <div class="legend-banner">
-    <div style="font-weight: 700; font-size: 0.85rem; color: #1E293B;">
-        🧭 <strong>Map Color Guide:</strong>
-    </div>
-    <div class="legend-item">
-        <div class="legend-dot-red"></div>
-        <span><strong>Red (70–100):</strong> Critical Bottleneck (Court Stay / Low Compensation)</span>
-    </div>
-    <div class="legend-item">
-        <div class="legend-dot-orange"></div>
-        <span><strong>Orange (40–69):</strong> Watchlist (Compensation or Milestones Overdue)</span>
-    </div>
-    <div class="legend-item">
-        <div class="legend-dot-green"></div>
-        <span><strong>Green (1–39):</strong> On Schedule (Clearances Progressing Smoothly)</span>
-    </div>
+<div style="font-weight: 700; font-size: 0.85rem; color: #1E293B;">
+🧭 <strong>Map Color Guide:</strong>
 </div>
+<div class="legend-item">
+<div class="legend-dot-red"></div>
+<span><strong>Red (70–100):</strong> Critical Bottleneck (Court Stay / Low Compensation)</span>
+</div>
+<div class="legend-item">
+<div class="legend-dot-orange"></div>
+<span><strong>Orange (40–69):</strong> Watchlist (Compensation or Milestones Overdue)</span>
+</div>
+<div class="legend-item">
+<div class="legend-dot-green"></div>
+<span><strong>Green (1–39):</strong> On Schedule (Clearances Progressing Smoothly)</span>
+</div>
+</div>
+
 """, unsafe_allow_html=True)
 
 # Regional Coordinates Pre-sets
@@ -292,39 +298,49 @@ avg_delay = int(sum(m["delay_days"] for m in filtered_markers) / total_count) if
 
 with c1:
     st.markdown(f"""
-    <div class="kpi-chip">
-        <div class="kpi-chip-title">Total Projects</div>
-        <div class="kpi-chip-val" style="color: #0F172A;">{total_count}</div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="kpi-chip">
+<div class="kpi-chip-title">Total Projects</div>
+<div class="kpi-chip-val" style="color: #0F172A;">{total_count}</div>
+</div>
+
+""", unsafe_allow_html=True)
 with c2:
     st.markdown(f"""
-    <div class="kpi-chip" style="border-left: 4px solid #EF4444;">
-        <div class="kpi-chip-title">🔴 Critical Bottlenecks</div>
-        <div class="kpi-chip-val" style="color: #DC2626;">{high_count}</div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="kpi-chip" style="border-left: 4px solid #EF4444;">
+<div class="kpi-chip-title">🔴 Critical Bottlenecks</div>
+<div class="kpi-chip-val" style="color: #DC2626;">{high_count}</div>
+</div>
+
+""", unsafe_allow_html=True)
 with c3:
     st.markdown(f"""
-    <div class="kpi-chip" style="border-left: 4px solid #F59E0B;">
-        <div class="kpi-chip-title">🟠 Watchlist Projects</div>
-        <div class="kpi-chip-val" style="color: #D97706;">{med_count}</div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="kpi-chip" style="border-left: 4px solid #F59E0B;">
+<div class="kpi-chip-title">🟠 Watchlist Projects</div>
+<div class="kpi-chip-val" style="color: #D97706;">{med_count}</div>
+</div>
+
+""", unsafe_allow_html=True)
 with c4:
     st.markdown(f"""
-    <div class="kpi-chip" style="border-left: 4px solid #10B981;">
-        <div class="kpi-chip-title">🟢 On Track</div>
-        <div class="kpi-chip-val" style="color: #059669;">{low_count}</div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="kpi-chip" style="border-left: 4px solid #10B981;">
+<div class="kpi-chip-title">🟢 On Track</div>
+<div class="kpi-chip-val" style="color: #059669;">{low_count}</div>
+</div>
+
+""", unsafe_allow_html=True)
 with c5:
     st.markdown(f"""
-    <div class="kpi-chip">
-        <div class="kpi-chip-title">Avg Forecasted Delay</div>
-        <div class="kpi-chip-val" style="color: #2563EB;">+{avg_delay} d</div>
-    </div>
-    """, unsafe_allow_html=True)
+
+<div class="kpi-chip">
+<div class="kpi-chip-title">Avg Forecasted Delay</div>
+<div class="kpi-chip-val" style="color: #2563EB;">+{avg_delay} d</div>
+</div>
+
+""", unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -463,38 +479,40 @@ with col_inspector:
         badge_fg = "#DC2626" if is_high else ("#D97706" if is_med else "#059669")
 
         st.markdown(f"""
+
 <div class="inspector-card">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-        <span style="background: {badge_bg}; color: {badge_fg}; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 12px;">
-            {active_p['risk_category'].upper()} RISK ({active_p['risk_score']}/100)
-        </span>
-        <span style="font-size: 0.75rem; color: #64748B; font-weight: 600;">{active_p.get('sector', 'Infrastructure')}</span>
-    </div>
-    <h3 style="margin: 10px 0 4px 0; color: #0F172A; font-size: 1.25rem;">{active_p['project_name']}</h3>
-    <div style="font-size: 0.8rem; color: #64748B; margin-bottom: 12px;">
-        📍 {active_p['district']}, {active_p['state']} • Code: <code>{active_p['project_id']}</code>
-    </div>
-    <div style="background: #F8FAFC; border-radius: 10px; padding: 12px; margin-bottom: 12px; border: 1px solid #E2E8F0;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
-            <span style="color: #475569;">Forecasted Delay:</span>
-            <strong style="color: #DC2626;">+{active_p['delay_days']} days</strong>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
-            <span style="color: #475569;">Acquisition Stage:</span>
-            <strong style="color: #1E293B;">{active_p['stage']}</strong>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
-            <span style="color: #475569;">Disbursed Compensation:</span>
-            <strong style="color: {'#16A34A' if active_p['compensation_pct'] >= 70 else '#DC2626'};">{active_p['compensation_pct']}%</strong>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
-            <span style="color: #475569;">Litigation / Stay Order:</span>
-            <strong style="color: {'#DC2626' if active_p['legal_case'] == 1 else '#16A34A'};">
-                {'⚠️ Active Injunction' if active_p['legal_case'] == 1 else '⚖️ No Active Disputes'}
-            </strong>
-        </div>
-    </div>
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<span style="background: {badge_bg}; color: {badge_fg}; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 12px;">
+{active_p['risk_category'].upper()} RISK ({active_p['risk_score']}/100)
+</span>
+<span style="font-size: 0.75rem; color: #64748B; font-weight: 600;">{active_p.get('sector', 'Infrastructure')}</span>
 </div>
+<h3 style="margin: 10px 0 4px 0; color: #0F172A; font-size: 1.25rem;">{active_p['project_name']}</h3>
+<div style="font-size: 0.8rem; color: #64748B; margin-bottom: 12px;">
+📍 {active_p['district']}, {active_p['state']} • Code: <code>{active_p['project_id']}</code>
+</div>
+<div style="background: #F8FAFC; border-radius: 10px; padding: 12px; margin-bottom: 12px; border: 1px solid #E2E8F0;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
+<span style="color: #475569;">Forecasted Delay:</span>
+<strong style="color: #DC2626;">+{active_p['delay_days']} days</strong>
+</div>
+<div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
+<span style="color: #475569;">Acquisition Stage:</span>
+<strong style="color: #1E293B;">{active_p['stage']}</strong>
+</div>
+<div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.82rem;">
+<span style="color: #475569;">Disbursed Compensation:</span>
+<strong style="color: {'#16A34A' if active_p['compensation_pct'] >= 70 else '#DC2626'};">{active_p['compensation_pct']}%</strong>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+<span style="color: #475569;">Litigation / Stay Order:</span>
+<strong style="color: {'#DC2626' if active_p['legal_case'] == 1 else '#16A34A'};">
+{'⚠️ Active Injunction' if active_p['legal_case'] == 1 else '⚖️ No Active Disputes'}
+</strong>
+</div>
+</div>
+</div>
+
 """, unsafe_allow_html=True)
         
         # Plain-English AI Diagnosis
@@ -531,12 +549,14 @@ top_cols = st.columns(5)
 for idx, p in enumerate(top_5):
     with top_cols[idx]:
         st.markdown(f"""
-        <div style="background: white; border: 1px solid #E2E8F0; border-top: 4px solid #EF4444; border-radius: 10px; padding: 12px; height: 100%;">
-            <div style="font-size: 0.72rem; color: #EF4444; font-weight: 800;">SCORE: {p['risk_score']}/100</div>
-            <div style="font-weight: 700; font-size: 0.85rem; color: #0F172A; margin: 4px 0; min-height: 40px;">{p['project_name']}</div>
-            <div style="font-size: 0.75rem; color: #64748B;">📍 {p['state']}</div>
-            <div style="font-size: 0.75rem; color: #DC2626; font-weight: 600; margin-top: 4px;">+{p['delay_days']} days delay</div>
-        </div>
-        """, unsafe_allow_html=True)
+
+<div style="background: white; border: 1px solid #E2E8F0; border-top: 4px solid #EF4444; border-radius: 10px; padding: 12px; height: 100%;">
+<div style="font-size: 0.72rem; color: #EF4444; font-weight: 800;">SCORE: {p['risk_score']}/100</div>
+<div style="font-weight: 700; font-size: 0.85rem; color: #0F172A; margin: 4px 0; min-height: 40px;">{p['project_name']}</div>
+<div style="font-size: 0.75rem; color: #64748B;">📍 {p['state']}</div>
+<div style="font-size: 0.75rem; color: #DC2626; font-weight: 600; margin-top: 4px;">+{p['delay_days']} days delay</div>
+</div>
+
+""", unsafe_allow_html=True)
 
 render_gov_footer()

@@ -46,6 +46,26 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.copy()
     
+    # Ensure required columns exist with defaults if omitted
+    if "clr_completed_pct" not in df.columns:
+        df["clr_completed_pct"] = 97.5
+    if "cost_overrun_pct" not in df.columns:
+        df["cost_overrun_pct"] = 0.0
+    if "legal_case" not in df.columns:
+        df["legal_case"] = 0
+    if "compensation_pct" not in df.columns:
+        df["compensation_pct"] = 50.0
+    if "rr_status" not in df.columns:
+        df["rr_status"] = "Pending"
+    if "stage" not in df.columns:
+        df["stage"] = "Section 4 - Preliminary Notification"
+    if "budget_crores" not in df.columns:
+        df["budget_crores"] = 100.0
+    if "affected_families" not in df.columns:
+        df["affected_families"] = 100
+    if "planned_duration_days" not in df.columns:
+        df["planned_duration_days"] = 365
+
     # Stage index
     df["stage_index"] = df["stage"].map(lambda s: STAGE_MAP.get(s, 0)).astype(int)
     

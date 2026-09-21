@@ -131,7 +131,72 @@ class APIClient:
         res.raise_for_status()
         return res.json()
 
+    def get_capital_allocation(
+        self,
+        state: Optional[str] = None,
+        sector: Optional[str] = None,
+        stage: Optional[str] = None
+    ) -> Dict[str, Any]:
+        url = f"{self.base_url}/capital-allocation"
+        params = {}
+        if state and state != "All":
+            params["state"] = state
+        if sector and sector != "All":
+            params["sector"] = sector
+        if stage and stage != "All":
+            params["stage"] = stage
+        try:
+            res = requests.get(url, params=params, timeout=10)
+            if res.status_code == 200:
+                return res.json()
+        except Exception:
+            pass
+
+        # Local fallback using DB and CostEstimator
+        try:
+            from backend.app.db.database import SessionLocal
+            from backend.app.db.crud import get_projects
+            from backend.app.ml.cost_estimator import get_cost_estimator
+            db = SessionLocal()
+            projects = get_projects(db, state=state if state != "All" else None, stage=stage if stage != "All" else None)
+            proj_dicts = [p.to_dict() for p in projects]
+            db.close()
+            if sector and sector != "All":
+                proj_dicts = [p for p in proj_dicts if p.get("sector") == sector]
+            estimator = get_cost_estimator()
+            cost_data = estimator.batch_estimate_costs(proj_dicts)
+            total_sanctioned = sum(p["sanctioned_budget_crores"] for p in cost_data)
+            total_estimated = sum(p["estimated_total_cost_crores"] for p in cost_data)
+            total_overrun = round(total_estimated - total_sanctioned, 2)
+            avg_overrun_pct = round((total_overrun / total_sanctioned * 100.0), 2) if total_sanctioned > 0 else 0.0
+            return {
+                "summary": {
+                    "total_projects": len(cost_data),
+                    "total_sanctioned_budget_crores": round(total_sanctioned, 2),
+                    "total_estimated_expenditure_crores": round(total_estimated, 2),
+                    "net_overrun_crores": total_overrun,
+                    "portfolio_overrun_pct": avg_overrun_pct,
+                    "high_overrun_count": sum(1 for p in cost_data if p["overrun_tier"] == "High Overrun"),
+                    "moderate_overrun_count": sum(1 for p in cost_data if p["overrun_tier"] == "Moderate Overrun"),
+                    "on_budget_count": sum(1 for p in cost_data if p["overrun_tier"] == "On Budget")
+                },
+                "projects": cost_data
+            }
+        except Exception:
+            return {"summary": {}, "projects": []}
+
+    def predict_cost(self, project_id: str) -> Dict[str, Any]:
+        url = f"{self.base_url}/predict-cost/{project_id}"
+        try:
+            res = requests.get(url, timeout=10)
+            if res.status_code == 200:
+                return res.json()
+        except Exception:
+            pass
+        return {}
+
 # Global client singleton
 client = APIClient()
+
 
 
