@@ -10,6 +10,13 @@ from .auth import (
     LOGO_PATH
 )
 from .config import USE_LIVE_API, get_dataset_metadata
+from .i18n import (
+    t,
+    get_current_lang,
+    set_lang,
+    render_language_toggle,
+    TRANSLATIONS
+)
 from .gov_theme import (
     apply_gov_theme,
     hide_default_sidebar_nav,
@@ -37,6 +44,11 @@ __all__ = [
     "LOGO_PATH",
     "USE_LIVE_API",
     "get_dataset_metadata",
+    "t",
+    "get_current_lang",
+    "set_lang",
+    "render_language_toggle",
+    "TRANSLATIONS",
     "apply_gov_theme",
     "hide_default_sidebar_nav",
     "render_top_navbar",
@@ -49,5 +61,3 @@ __all__ = [
     "render_gov_footer",
     "NAV_ITEMS",
 ]
-
-

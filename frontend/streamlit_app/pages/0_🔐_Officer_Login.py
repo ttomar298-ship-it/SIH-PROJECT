@@ -21,6 +21,7 @@ from utils.auth import (
     DEMO_USERS,
     get_logo_base64,
 )
+from utils.i18n import t, get_current_lang
 from utils.gov_theme import (
     apply_gov_theme,
     hide_default_sidebar_nav,
@@ -39,17 +40,15 @@ apply_gov_theme()
 hide_default_sidebar_nav()
 render_split_login_header(
     logo_path=LOGO_PATH,
-    title="Officer Login",
-    subtitle="Role-based access for authorized government officials",
+    title=t("officer_login_title", "Officer Login"),
+    subtitle=t("officer_login_sub", "Role-based access for authorized government officials"),
 )
-
 
 # Custom CSS for Login Portal
 st.markdown("""
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-* { font-family: 'Plus Jakarta Sans', sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap');
+* { font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif; }
 
 .login-container {
 max-width: 900px;
@@ -59,14 +58,6 @@ border-radius: 20px;
 box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12);
 border: 1px solid #E2E8F0;
 overflow: hidden;
-}
-
-.portal-hero {
-background: linear-gradient(135deg, #064E3B 0%, #065F46 40%, #047857 70%, #059669 100%);
-color: white;
-padding: 36px 40px;
-text-align: center;
-border-bottom: 4px solid #10B981;
 }
 
 .role-card {
@@ -110,11 +101,9 @@ border: 1px solid #047857;
 box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.25);
 }
 </style>
-
 """, unsafe_allow_html=True)
 
 user = get_current_user()
-
 
 if is_authenticated() and user:
     st.success(f"✅ **Session Active:** Logged in as **{user['name']}** ({user['role']})")
@@ -122,7 +111,6 @@ if is_authenticated() and user:
     c_card, c_actions = st.columns([2, 1])
     with c_card:
         st.markdown(f"""
-
 <div class="active-profile-card">
 <div style="display: flex; align-items: center; gap: 16px;">
 <div style="font-size: 3rem; background: rgba(255,255,255,0.1); border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border: 2px solid #10B981;">
@@ -139,12 +127,11 @@ if is_authenticated() and user:
 </div>
 </div>
 </div>
-
 """, unsafe_allow_html=True)
         
     with c_actions:
-        st.markdown("#### Session Controls")
-        if st.button("🚪 Sign Out of Bhoomi AI", width="stretch", type="secondary"):
+        st.markdown(f"#### {t('sign_out', '🚪 Sign Out')}")
+        if st.button(t("sign_out", "🚪 Sign Out"), width="stretch", type="secondary"):
             logout()
             st.rerun()
             
@@ -152,18 +139,21 @@ if is_authenticated() and user:
         st.markdown("**Quick Navigation:**")
         col_nav1, col_nav2 = st.columns(2)
         with col_nav1:
-            st.page_link("pages/Officer_Dashboard.py", label="Officer Dashboard", icon="🏛️", width="stretch")
-            st.page_link("pages/4_🗺️_GIS_Map.py", label="GIS Risk Map", icon="🗺️", width="stretch")
+            st.page_link("pages/Officer_Dashboard.py", label=t("nav_dashboard", "🏛️ Dashboard"), width="stretch")
+            st.page_link("pages/4_🗺️_GIS_Map.py", label=t("nav_gis", "🗺️ GIS Map"), width="stretch")
         with col_nav2:
-            st.page_link("pages/2_🏆_Risk_Ranking.py", label="Risk Ranking", icon="🏆", width="stretch")
-            st.page_link("pages/5_🚨_Alerts.py", label="Smart Alerts", icon="🚨", width="stretch")
+            st.page_link("pages/2_🏆_Risk_Ranking.py", label=t("nav_risk", "🏆 Risk Ranking"), width="stretch")
+            st.page_link("pages/5_🚨_Alerts.py", label=t("nav_alerts", "🚨 Alerts"), width="stretch")
 
     st.markdown("---")
     st.markdown("### 🔄 Switch Officer Role")
     st.caption("Select a different department or jurisdiction to view role-tailored views and alerts:")
 
-# Render Login Tabs (shown when not logged in, or as role-switcher when logged in)
-tab_quick, tab_form = st.tabs(["⚡ 1-Click Fast Login (Presentation / Jury)", "🔐 Official Credentials Login"])
+# Render Login Tabs
+tab_quick, tab_form = st.tabs([
+    t("tab_quick_login", "⚡ 1-Click Fast Login (Presentation / Jury)"),
+    t("tab_official_login", "🔐 Official Credentials Login")
+])
 
 with tab_quick:
     st.markdown("#### Select Officer Role for Immediate Authentication:")
@@ -172,86 +162,74 @@ with tab_quick:
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.markdown("""
-
+        st.markdown(f"""
 <div class="role-card">
 <div class="role-icon">🏛️</div>
-<div class="role-title">National Director</div>
-<div class="role-dept">PM GatiShakti National Master Plan (DPIIT)</div>
+<div class="role-title">{t("role_director", "National Director")}</div>
+<div class="role-dept">{t("role_director_dept", "PM GatiShakti National Master Plan (DPIIT)")}</div>
 <span style="font-size: 0.7rem; background: #DCFCE7; color: #166534; padding: 2px 8px; border-radius: 8px; font-weight: 600;">Full Access</span>
 </div>
-
 """, unsafe_allow_html=True)
-        if st.button("Log In as Director", key="btn_login_director", width="stretch", type="primary"):
+        if st.button(t("btn_login_director", "Log In as Director"), key="btn_login_director", width="stretch", type="primary"):
             quick_login("director")
             st.switch_page("pages/Officer_Dashboard.py")
 
     with col2:
-        st.markdown("""
-
+        st.markdown(f"""
 <div class="role-card">
 <div class="role-icon">⚖️</div>
-<div class="role-title">CALA Officer</div>
-<div class="role-dept">Competent Authority Land Acquisition (Revenue)</div>
+<div class="role-title">{t("role_cala", "CALA Officer")}</div>
+<div class="role-dept">{t("role_cala_dept", "Competent Authority Land Acquisition (Revenue)")}</div>
 <span style="font-size: 0.7rem; background: #FEF3C7; color: #92400E; padding: 2px 8px; border-radius: 8px; font-weight: 600;">District Level</span>
 </div>
-
 """, unsafe_allow_html=True)
-        if st.button("Log In as CALA", key="btn_login_cala", width="stretch", type="primary"):
+        if st.button(t("btn_login_cala", "Log In as CALA"), key="btn_login_cala", width="stretch", type="primary"):
             quick_login("cala")
             st.switch_page("pages/Officer_Dashboard.py")
 
     with col3:
-        st.markdown("""
-
+        st.markdown(f"""
 <div class="role-card">
 <div class="role-icon">📊</div>
-<div class="role-title">MoSPI Central Monitor</div>
-<div class="role-dept">Ministry of Statistics & Programme Implementation</div>
+<div class="role-title">{t("role_mospi", "MoSPI Central Monitor")}</div>
+<div class="role-dept">{t("role_mospi_dept", "Ministry of Statistics & Programme Implementation")}</div>
 <span style="font-size: 0.7rem; background: #E0E7FF; color: #3730A3; padding: 2px 8px; border-radius: 8px; font-weight: 600;">National Audit</span>
 </div>
-
 """, unsafe_allow_html=True)
-        if st.button("Log In as MoSPI", key="btn_login_mospi", width="stretch", type="primary"):
+        if st.button(t("btn_login_mospi", "Log In as MoSPI"), key="btn_login_mospi", width="stretch", type="primary"):
             quick_login("mospi")
             st.switch_page("pages/Officer_Dashboard.py")
 
     with col4:
-        st.markdown("""
-
+        st.markdown(f"""
 <div class="role-card">
 <div class="role-icon">⭐</div>
-<div class="role-title">SIH Evaluation Jury</div>
-<div class="role-dept">Smart India Hackathon Grand Finale Jury</div>
+<div class="role-title">{t("role_jury", "SIH Evaluation Jury")}</div>
+<div class="role-dept">{t("role_jury_dept", "Smart India Hackathon Grand Finale Jury")}</div>
 <span style="font-size: 0.7rem; background: #DCFCE7; color: #166534; padding: 2px 8px; border-radius: 8px; font-weight: 600;">VIP Evaluator</span>
 </div>
-
 """, unsafe_allow_html=True)
-        if st.button("Log In as SIH Jury", key="btn_login_jury", width="stretch", type="primary"):
+        if st.button(t("btn_login_jury", "Log In as SIH Jury"), key="btn_login_jury", width="stretch", type="primary"):
             quick_login("jury")
             st.switch_page("pages/Officer_Dashboard.py")
 
 with tab_form:
     st.markdown("#### Enter Official Email & Password")
     with st.form("credentials_login_form"):
-        f_email = st.text_input("Official Gov Email / Username", placeholder="e.g. director@gatishakti.gov.in or cala@revenue.gov.in")
-        f_pass = st.text_input("Password", type="password", placeholder="Enter official access token or password")
+        f_email = st.text_input(t("input_email", "Official Gov Email / Username"), placeholder="e.g. director@gatishakti.gov.in or cala@revenue.gov.in")
+        f_pass = st.text_input(t("input_password", "Password"), type="password", placeholder="Enter official access token or password")
         remember = st.checkbox("Keep session active on this workstation", value=True)
-        submit_btn = st.form_submit_button("Authenticate Officer 🛡️", width="stretch", type="primary")
+        submit_btn = st.form_submit_button(t("btn_auth_officer", "Authenticate Officer 🛡️"), width="stretch", type="primary")
         
         if submit_btn:
-            # TODO: replace with real credential verification backend service
             if login(f_email, f_pass):
                 st.switch_page("pages/Officer_Dashboard.py")
             else:
                 st.error("❌ Invalid credentials. You can use 1-click test roles in the first tab or enter password `admin`.")
 
-
-
 # Security & Compliance Footer
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("""
-
 <div style="background: #F1F5F9; border-radius: 12px; padding: 14px 20px; border: 1px solid #CBD5E1; font-size: 0.8rem; color: #475569; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
 <div>
 🔒 <strong>Gov-Standard Security:</strong> 256-Bit TLS End-to-End Encryption • Role-Based Access Control (RBAC)
@@ -260,7 +238,6 @@ st.markdown("""
 🏛️ <strong>Integrations:</strong> PM GatiShakti NMP • DILRMP Land Records • MoSPI Mega-Projects Database
 </div>
 </div>
-
 """, unsafe_allow_html=True)
 
 render_gov_footer()

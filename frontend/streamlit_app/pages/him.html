@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login Page</title>
 
     <style>
@@ -10,7 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
@@ -18,21 +19,37 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #2563eb, #0f172a);
+
+            background:
+                linear-gradient(
+                    rgba(15, 23, 42, 0.75),
+                    rgba(37, 99, 235, 0.75)
+                ),
+                url("https://images.unsplash.com/photo-1519608487953-e999c86e7455")
+                center/cover no-repeat;
         }
 
+        /* Login Card */
         .login-box {
             width: 380px;
-            background: white;
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+            background: rgba(255, 255, 255, 0.95);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.35);
+
+            backdrop-filter: blur(10px);
         }
 
-        h1 {
+        /* Heading */
+        .login-box h1 {
             text-align: center;
-            color: #1e293b;
-            margin-bottom: 10px;
+            color: #0f172a;
+            font-size: 32px;
+            margin-bottom: 8px;
         }
 
         .subtitle {
@@ -41,60 +58,107 @@
             margin-bottom: 30px;
         }
 
-        label {
+        /* Input Groups */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+
             color: #334155;
+            font-weight: 600;
         }
 
-        input {
+        .input-group input {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
+
+            padding: 13px 15px;
+
             border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            border-radius: 9px;
+
             font-size: 15px;
-        }
 
-        input:focus {
             outline: none;
-            border-color: #2563eb;
+
+            transition: 0.3s;
         }
 
+        .input-group input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Remember + Forgot */
         .options {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+
+            margin-bottom: 22px;
+
             font-size: 14px;
         }
 
-        .options a {
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #475569;
+        }
+
+        .remember input {
+            width: auto;
+        }
+
+        .forgot {
             color: #2563eb;
             text-decoration: none;
         }
 
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Button */
         .login-btn {
             width: 100%;
-            padding: 13px;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 9px;
+
             background: #2563eb;
             color: white;
-            border: none;
-            border-radius: 8px;
+
             font-size: 16px;
             font-weight: bold;
+
             cursor: pointer;
+
+            transition: 0.3s;
         }
 
         .login-btn:hover {
             background: #1d4ed8;
+
+            transform: translateY(-1px);
         }
 
+        /* Signup */
         .signup {
             text-align: center;
-            margin-top: 20px;
+
+            margin-top: 22px;
+
             color: #64748b;
+
+            font-size: 14px;
         }
 
         .signup a {
@@ -102,55 +166,291 @@
             text-decoration: none;
             font-weight: bold;
         }
+
+        /* Music Button */
+        .music-control {
+            position: fixed;
+
+            bottom: 25px;
+            right: 25px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-btn {
+            width: 50px;
+            height: 50px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.3);
+
+            transition: 0.3s;
+        }
+
+        .music-btn:hover {
+            background: #1d4ed8;
+            transform: scale(1.08);
+        }
+
+        .music-text {
+            background: white;
+            padding: 8px 12px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            color: #334155;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+
+            .login-box {
+                width: 90%;
+                padding: 30px 25px;
+            }
+
+            .music-text {
+                display: none;
+            }
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- LOGIN CARD -->
     <div class="login-box">
 
         <h1>Welcome Back</h1>
-        <p class="subtitle">Login to your account</p>
 
-        <form>
+        <p class="subtitle">
+            Login to your account
+        </p>
 
-            <label for="email">Email</label>
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                required
-            >
+        <form id="loginForm">
 
-            <label for="password">Password</label>
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                required
-            >
+            <!-- Email -->
+            <div class="input-group">
 
-            <div class="options">
-                <label>
-                    <input type="checkbox">
-                    Remember me
+                <label for="email">
+                    Email Address
                 </label>
 
-                <a href="#">Forgot Password?</a>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
             </div>
 
-            <button type="submit" class="login-btn">
+
+            <!-- Password -->
+            <div class="input-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Options -->
+            <div class="options">
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                    >
+
+                    Remember me
+
+                </label>
+
+
+                <a
+                    href="#"
+                    class="forgot"
+                >
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <!-- Login -->
+            <button
+                type="submit"
+                class="login-btn"
+            >
                 Login
             </button>
 
         </form>
 
+
+        <!-- Signup -->
         <p class="signup">
+
             Don't have an account?
-            <a href="#">Sign Up</a>
+
+            <a href="#">
+                Sign Up
+            </a>
+
         </p>
 
     </div>
+
+
+    <!-- ================================= -->
+    <!-- AUDIO -->
+    <!-- ================================= -->
+
+    <audio
+        id="backgroundMusic"
+        src="audio/Addat.mp3"
+        loop>
+    </audio>
+
+
+    <!-- Music Control -->
+    <div class="music-control">
+
+        <span
+            class="music-text"
+            id="musicText">
+            Addat • Music Off
+        </span>
+
+        <button
+            class="music-btn"
+            id="musicButton"
+            title="Play / Pause Music">
+
+            ▶
+
+        </button>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================= -->
+
+    <script>
+
+        const music =
+            document.getElementById("backgroundMusic");
+
+        const musicButton =
+            document.getElementById("musicButton");
+
+        const musicText =
+            document.getElementById("musicText");
+
+
+        /* ------------------------------
+           PLAY / PAUSE MUSIC
+        ------------------------------ */
+
+        musicButton.addEventListener("click", function () {
+
+            if (music.paused) {
+
+                music.play();
+
+                musicButton.innerHTML = "⏸";
+
+                musicText.innerHTML =
+                    "Addat • Music On";
+
+            } else {
+
+                music.pause();
+
+                musicButton.innerHTML = "▶";
+
+                musicText.innerHTML =
+                    "Addat • Music Off";
+            }
+
+        });
+
+
+        /* ------------------------------
+           LOGIN BUTTON
+        ------------------------------ */
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                /*
+                    Start music when Login is clicked.
+                    Browsers normally block automatic
+                    audio until the user interacts
+                    with the page.
+                */
+
+                music.play()
+                    .then(function () {
+
+                        musicButton.innerHTML = "⏸";
+
+                        musicText.innerHTML =
+                            "Addat • Music On";
+
+                    })
+                    .catch(function (error) {
+
+                        console.log(
+                            "Audio could not be played:",
+                            error
+                        );
+
+                    });
+
+
+                /* Demo login message */
+
+                alert(
+                    "Login button clicked!"
+                );
+
+            });
+
+    </script>
 
 </body>
 </html>
